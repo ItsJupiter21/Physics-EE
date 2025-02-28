@@ -1,10 +1,16 @@
 \documentclass[a4paper,12pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[style=authoryear,backend=biber]{biblatex}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
 
-\renewcommand{\baselinestretch}{2}
+
+\renewcommand{\baselinestretch}{1.5}
 \renewcommand*\contentsname{Table Of Contents}
 \addbibresource{bibliography.bib}
+
+\newcommand{\ResearchQ}{To what extent does changing the length of a circular cantilever beam affect its resonant frequency, and how well can the theoretical model predict this relationship?}
 \begin{document}
 
 \begin{titlepage}
@@ -15,7 +21,7 @@
 
         \vspace{.5cm}
         \textbf{Research Question:}
-        To what extent does changing the properties of a circular cantilever beam affect its resonant frequency, and how well can the theoretical model predict this relationship?
+        \ResearchQ
 
         \vspace{0.5cm}
         International Baccalaureate Physics Extended Essay
@@ -24,7 +30,7 @@
 
         \vspace{0.8cm}
 
-        Word Count:210
+        Word Count:422
 
 
     \end{center}
@@ -49,25 +55,45 @@
 
 \section{Introduction}%500
 
-    Cantilever beams, seemingly simple elements used in construction where one end of a beam is solidly attached and the other loose, has played a major role in engineering, historically they were used for purely mechanical structures such as buildings, cranes and balconies.
-    \autocite{BuildingConstructionBook}\\
-    While the use of such simple elements is still common in archaic construction, their utility expands far beyond macroscopic architecture, Nowadays cutting edge technology such as MEMS(micro-electromechanical) systems which bridge electrical and mechanical systems on the semiconductor level, use such structures as well, microscopic strain gauges being used in gyroscopes to sense tiny acceleration forces.
-    \autocite{MemsBook}%Analysis and Design Principles of MEMS Devices
+Cantilever beams, seemingly simple elements used in construction where one end of a beam is solidly attached and the other loose, has played a major role in engineering, historically they were used for purely mechanical structures such as buildings, cranes and balconies.
+\autocite{BuildingConstructionBook}\\
+While the use of such simple elements is still common in traditional construction, their utility expands far beyond macroscopic architecture, Nowadays cutting edge technology such as MEMS(micro-electromechanical) systems which integrate mechanical systems with electronics in a microscopic level, use such structures as well, microscopic cantilever beams are being used as inertial sensor in gyroscopes to sense tiny acceleration forces.
+\autocite{MemsBook}%Analysis and Design Principles of MEMS Devices
 
 
-    Personally, I was impressed that such simple structures was in the core of such advanced technology we take for granted today, gyroscopes and accelerometers are the core of car safety systems and mobile device tracking, and used by billions everyday.
+I was fascinated to learn that such simple structures lie at the core of technologies we take for granted today. This pushed me to further investigate their functionality and their dynamic properties. My research question is ``\ResearchQ'' and
+I aim to determine how the length of the beam and the initial energy loaded into the beam will affect the frequency that the beam naturally vibrates at when excited using pure mathematics, Finite Element Analysis and Experimentally.
+As shown in ~\eqref{eqn:theory}, I am expecting to see the frequency is inversely proportional to the square of its length, and to see no relationship between the frequency and the initial energy load.
 
-        The research question is `` To what extent does changing the properties of a circular cantilever beam affect its resonant frequency, and how well can the theoretical model predict this relationship? '' and I aim to
+\begin{align}
+\label{eqn:theory}
+\begin{split}
+f_{n}\propto \frac{1}{l^{2}}
+\\
+f_{n}\not\sim E_{initial}
+\end{split}
+\end{align}
 
-    I aim to investigate how the length of the beam and the initial energy loaded into the beam will affect the frequency that the beam naturally vibrates at, or the resonant frequency, according to the theory,  the length of the beam should affect the frequency but the initial energy transferred should not affect it.
-    I specifically picked this topic to write about to because I was drawn to a simple topic having such complex calculations and wide use cases.
 
-\section{Background Information}%600
+
+
+
+
+\section{Background Information}%600-200=400
     \subsection{Fourier Transform}
 
-\section{Methodology}%700
-    \subsection{Theory}
 
+    \subsection{Finite Element Method}%208rn, "done"
+    In engineering, it is common to be faced with partial differential equations(PDE), these equations are usually complex and are computationally intense to calculate, for example, calculating heat transfer, fluid flow, or in the case of this paper, non-rigid bodies.
+    The Finite Element Method(FEM) is a way method to estimate the result of the PDE, by dividing the continuous space of the problem into smaller, discrete parts called finite elements.
+    The collection of the finite elements is known as the mesh. By dividing the space, analysis within each element becomes simpler, and later combined to get an estimation, this allows the computation of the differential equations to be computationally simpler. As this is a method of estimation, the results are not always accurate, to get the estimate closer to reality, the mesh resolution is increased at the cost of compute time.\autocite{FEABook} \\
+    The use of this method of engineering analysis is commonly known as Finite Element Analysis(FEA) and will be used as a virtual experiment in \ref{FEA} to simulate the cantilever beams natural frequency.
+    As this method allows to simulate deformation of bodies, this tool is generally built into Computer Aided Design(CAD) suites and Onshape, a cloud based CAD suite will be used in this paper.
+
+
+\section{Methodology} \label{Methodology}%700
+    \subsection{Theory}
+    \subsection{Finite Element Analysis} \label{FEA}
     \subsection{Materials}
 
 
@@ -78,5 +104,9 @@
 
 \section{Conclusion}%500
 
+\addcontentsline{toc}{section}{References}
+
 \printbibliography
+
+
 \end{document}
