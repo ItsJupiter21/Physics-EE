@@ -10,8 +10,14 @@
 \usepackage{graphicx}
 \usepackage{wrapfig}
 \usepackage{wasysym}
+\usepackage{float}
+\usepackage{pgfplots}
+
+%\usepgfplotslibrary{external}
+%\tikzexternalize
 \graphicspath{ {./images/} }
 
+\pgfplotsset{compat=1.18}
 \renewcommand{\baselinestretch}{1.5}
 \renewcommand*\contentsname{Table Of Contents}
 \addbibresource{bibliography.bib}
@@ -38,7 +44,7 @@
 
         \vspace{0.8cm}
 
-        Word Count:596
+        Word Count:744
 
 
     \end{center}
@@ -124,20 +130,20 @@ f_{n}\not\sim E_{initial}
     E_{3}&=10\text{ J}\\
     \end{split}
     \end{align}
-    As shown in \eqref{eqn:constants}, The diameter $\diameter$ and length $l$ have been picked according to commonly available materials and for ease of acsess, the lengths picked should also be able to give a wide variety of frequencies.\\
+    As shown in \eqref{eqn:constants}, The diameter $\diameter$ and length $l$ have been picked according to commonly available materials and for ease of acsess, the lengths picked should also be able to give a wide variety of frequencies.
     Additionally, the material properties of hardened carbon steel are required to run the simulation, shown in \eqref{eqn:steel}, these values were taken from Onshape.
     \begin{align}%eqn:steel
     \label{eqn:steel}
     \begin{split}
-    \rho&=7.850\cdot10^{-6}~\frac{kg}{mm^{3}}\\
+    \rho&=7.850\times10^{-6}~\frac{kg}{mm^{3}}\\
     \nu&=0.292\\
     E&=200000000000~Pa\\
     \end{split}
     \end{align}
     Where $\rho$ is the Density, $\nu$ is Poisson's ratio and $E$ is Young's Modulus
-    \begin{figure}[h]%fig:VarTable
+    \begin{figure}[H]%fig:VarTable
     \begin{center}
-    \begin{tabular}{|c||c|c|c|c|}
+    \begin{tabular}[H]{|c||c|c|c|c|}
     \hline
     Variable & Length $l$ & Energy $E$ & Deformation $\epsilon$ & Frequency $f$ \\
     \hline\hline
@@ -151,56 +157,100 @@ f_{n}\not\sim E_{initial}
     \caption{The Table Of Variables}\label{fig:VarTable}
     \end{figure}
     The Table of variables is as Figure \ref{fig:VarTable}, or in other words, length $l$ and energy $E$ will be changed according to \eqref{eqn:constants} and a seperate simulation will be ran for each.
-
-    To prepare the
-    \begin{figure}[h]
-    \includegraphics[width=0.6\textwidth]{FEA3}
+    \begin{figure}[H]%fig:CADPic
+    \includegraphics[width=0.5\textwidth]{CADPic}
     \centering
-    \caption{The result of FEA, Independent legend for each.}
+    \caption{The Design of the Circular beam, $\diameter=22mm$ and $l=200mm$}\label{fig:CADPic}
     \centering
     \end{figure}
-    \begin{figure}[h]%fig:FEAtable
+    To start, a model was created for each length $l$, and was attached to a solid block as a reference frame. The 200mm long one can be seen in Figure \ref{fig:CADPic}
+    And for each block, the FEA simulation was run 3 times, once per $E$ value.
+    The deformation model for each model can be seen in Figure \ref{fig:FEAPic}, and the readings from the simulation was put into Figure \ref{fig:FEAtable} and as expected, inital energy $E$ shows no correlation with the frequency $f$, and the second part of \eqref{eqn:theory} has been shown true.
+    \begin{figure}[H]%fig:FEAPic
+    \includegraphics[width=0.7\textwidth]{FEA3}
+    \centering
+    \caption{The result of FEA, With the colours representing Deformation $\epsilon$ in mm.}\label{fig:FEAPic}
+    \centering
+    \end{figure}
+    \begin{figure}[H]%fig:FEAtable
     \begin{center}
-    \begin{tabular}{|c|c||c|c|}
+    \begin{tabular}[H]{|c|c||c|c||c|}
     \hline
-    $l$ & $E$ & $f$& $\epsilon$ \\
+    $l$ & $E$ & $f$ & $\epsilon$ & $\frac{1}{l^{2}}$\\
     \hline\hline
-    100mm & 5 J & 1536 hz & 1.434 mm \\
+    100mm & 5 J & 1536 hz & 1.434 mm & $10^{-4}~mm^{-2}$\\
     \hline
-    100mm & 7.5 J & 1536 hz & 1.756mm \\
+    100mm & 7.5 J & 1536 hz & 1.756mm & $10^{-4}~mm^{-2}$ \\
     \hline
-    100mm & 10 J & 1536 hz & 2.028mm \\
+    100mm & 10 J & 1536 hz & 2.028mm & $10^{-4}~mm^{-2}$\\
     \hline
-    150mm & 5 J & 694.2 hz & 2.601mm \\
+    150mm & 5 J & 694.2 hz & 2.601mm & $4.44\times10^{-5}mm^{-2}$\\
     \hline
-    150mm & 7.5 J & 694.2 hz & 3.185mm \\
+    150mm & 7.5 J & 694.2 hz & 3.185mm & $4.44\times10^{-5}mm^{-2}$\\
     \hline
-    150mm & 10 J & 694.2 hz & 3.678mm \\
+    150mm & 10 J & 694.2 hz & 3.678mm & $4.44\times10^{-5}mm^{-2}$\\
     \hline
-    200mm & 5 J & 392.9 hz & 3.981mm \\
+    200mm & 5 J & 392.9 hz & 3.981mm & $2.5\times10^{-5}mm^{-2}$\\
     \hline
-    200mm & 7.5 J & 392.9 hz & 4.876mm \\
+    200mm & 7.5 J & 392.9 hz & 4.876mm & $2.5\times10^{-5}mm^{-2}$\\
     \hline
-    200mm & 10 J & 392.9 hz & 5.63mm \\
+    200mm & 10 J & 392.9 hz & 5.630mm & $2.5\times10^{-5}mm^{-2}$\\
     \hline
-
-
     \end{tabular}
     \end{center}
-    \caption{The Table Of Values}\label{fig:FEAtable}
+    \caption{The FEA Results}\label{fig:FEAtable}
     \end{figure}
+    For the first part of \eqref{eqn:theory}, the modeling of $\frac{1}{l^{2}}$ in relation to $f$ is required, so for each value of $l$, and calculating it for each of gives the $\frac{1}{l^{2}}$ column of Figure \ref{fig:FEAtable} and the unit analysis regarding the unit of $\frac{1}{l^{2}}$ is given in \eqref{eqn:unitconv}.
+    \begin{align}%eqn:unitconv
+    \label{eqn:unitconv}
+    \begin{split}
+    \text{Given:}\\
+    l&=\text{mm}\\
+    f^{2}&=\text{mm}^{2}\\
+    \text{Thus:}\\
+    \frac{1}{f^{2}}&=\text{mm}^{-2}\\
+    \end{split}
+    \end{align}
+    According to \eqref{eqn:theory}, $\frac{1}{l^{2}}$ and $f$ should be proportional, in other words, when graphed, the best line of fit should be a straight line crossing the origin, or in mathemacial terms, $f \approx k \frac{1}{l^{2}}$ where $k$ is arbitrary.
+    \begin{figure}[H]%fig:regerssion
+    \begin{center}
+    \begin{tikzpicture}
+    \begin{axis}[
+        xlabel={$\frac{1}{l^{2}}$ [mm$^-2$]},
+        ylabel={Frequency $f$ [hz]},
+        legend pos=north west,
+        ymajorgrids=true,
+        grid style=dashed,
+    ]
+    \addplot [
+        domain=2.5e-5:1e-4,
+        samples=100,
+        color=blue,
+        ]
+        {15226342.949*x + 13.971};
+    \addlegendentry{Linear Fit}
+    \addplot+[
+        only marks,
+        color=blue,
+        mark=square,
+        ]
+        coordinates {
+        (1e-4,1536)(4.44e-5,694.2)(2.5e-5,392.9)
+        };
+    \end{axis}
+    \end{tikzpicture}
 
-    Since this is a simulation, the uncertainty is nonexistent
+    \caption{Table of ($\frac{1}{l^{2}}$,$f$) and linear regression}\label{fig:regression}
+    \end{center}
+    \end{figure}
+    Doing the regression analysis, $f=15226342\frac{1}{l^{2}}+13.9$, or $f\propto\frac{1}{l^{2}}+9.1\times10^{-7}$
+
 
 
     \subsection{Experiment}
-
-
 \section{Results And Analysis}%500
     \subsection{Uncertainty Analysis}
-
 \section{Discussion}%500
-
 \section{Conclusion}%500
 
 \pagebreak
@@ -209,3 +259,4 @@ f_{n}\not\sim E_{initial}
 
 
 \end{document}
+
