@@ -1,16 +1,24 @@
 \documentclass[a4paper,12pt]{article}
+
 \usepackage[utf8]{inputenc}
 \usepackage[style=authoryear,backend=biber]{biblatex}
+\usepackage[a4paper, margin=2.5cm]{geometry}
+
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
-
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{wasysym}
+\graphicspath{ {./images/} }
 
 \renewcommand{\baselinestretch}{1.5}
 \renewcommand*\contentsname{Table Of Contents}
 \addbibresource{bibliography.bib}
 
 \newcommand{\ResearchQ}{To what extent does changing the length of a circular cantilever beam affect its resonant frequency, and how well can the theoretical model predict this relationship?}
+
+
 \begin{document}
 
 \begin{titlepage}
@@ -30,7 +38,7 @@
 
         \vspace{0.8cm}
 
-        Word Count:422
+        Word Count:596
 
 
     \end{center}
@@ -47,25 +55,23 @@
 \addcontentsline{toc}{section}{Abstract}
 
     Write something here
-
 \end{abstract}
 \pagebreak
 
 \pagenumbering{arabic}
 
-\section{Introduction}%500
+\section{Introduction}%500rq have 211, maybe 250 more?
 
 Cantilever beams, seemingly simple elements used in construction where one end of a beam is solidly attached and the other loose, has played a major role in engineering, historically they were used for purely mechanical structures such as buildings, cranes and balconies.
 \autocite{BuildingConstructionBook}\\
 While the use of such simple elements is still common in traditional construction, their utility expands far beyond macroscopic architecture, Nowadays cutting edge technology such as MEMS(micro-electromechanical) systems which integrate mechanical systems with electronics in a microscopic level, use such structures as well, microscopic cantilever beams are being used as inertial sensor in gyroscopes to sense tiny acceleration forces.
 \autocite{MemsBook}%Analysis and Design Principles of MEMS Devices
 
-
 I was fascinated to learn that such simple structures lie at the core of technologies we take for granted today. This pushed me to further investigate their functionality and their dynamic properties. My research question is ``\ResearchQ'' and
 I aim to determine how the length of the beam and the initial energy loaded into the beam will affect the frequency that the beam naturally vibrates at when excited using pure mathematics, Finite Element Analysis and Experimentally.
-As shown in ~\eqref{eqn:theory}, I am expecting to see the frequency is inversely proportional to the square of its length, and to see no relationship between the frequency and the initial energy load.
+As shown in \eqref{eqn:theory}, I am expecting to see the frequency is inversely proportional to the square of its length, and to see no relationship between the frequency and the initial energy load.
 
-\begin{align}
+\begin{align}%eqn:theory
 \label{eqn:theory}
 \begin{split}
 f_{n}\propto \frac{1}{l^{2}}
@@ -79,22 +85,109 @@ f_{n}\not\sim E_{initial}
 
 
 
-\section{Background Information}%600-200=400
-    \subsection{Fourier Transform}
-
-
-    \subsection{Finite Element Method}%208rn, "done"
+\section{Background Information}%600, 400 left
+    \subsection{Fourier Transform} \label{FT}
+    The fourier Transform is a
+    \pagebreak
+    \subsection{Finite Element Method}\label{FEM}%208rn, "done"
     In engineering, it is common to be faced with partial differential equations(PDE), these equations are usually complex and are computationally intense to calculate, for example, calculating heat transfer, fluid flow, or in the case of this paper, non-rigid bodies.
     The Finite Element Method(FEM) is a way method to estimate the result of the PDE, by dividing the continuous space of the problem into smaller, discrete parts called finite elements.
+
     The collection of the finite elements is known as the mesh. By dividing the space, analysis within each element becomes simpler, and later combined to get an estimation, this allows the computation of the differential equations to be computationally simpler. As this is a method of estimation, the results are not always accurate, to get the estimate closer to reality, the mesh resolution is increased at the cost of compute time.\autocite{FEABook} \\
     The use of this method of engineering analysis is commonly known as Finite Element Analysis(FEA) and will be used as a virtual experiment in \ref{FEA} to simulate the cantilever beams natural frequency.
-    As this method allows to simulate deformation of bodies, this tool is generally built into Computer Aided Design(CAD) suites and Onshape, a cloud based CAD suite will be used in this paper.
+    As this method allows to simulate deformation of bodies, this tool is generally built into Computer Aided Design(CAD) suites and Onshape, a cloud based CAD suite will be used in this paper.\\
+    \begin{figure}[b]
+    \includegraphics[width=0.56\textwidth]{feaexample}
+    \centering
+    \caption{The result of FEA\autocite{feaexample}}
+    \centering
+    \end{figure}
 
 
 \section{Methodology} \label{Methodology}%700
-    \subsection{Theory}
-    \subsection{Finite Element Analysis} \label{FEA}
-    \subsection{Materials}
+    \subsection{Theory}\label{Theory}
+    \pagebreak
+    \subsection{Finite Element Analysis} \label{FEA}%400
+    As explained in \ref{FEM}, FEA is a method to compute ODEs, and as shown in \ref{Theory} the resonant frequencies of the beam can be calculated with an ODE.
+    Thankfully, there exists tools to calculate the FEM built-in on many CAD suites to make the calculations, in this case, PTC's Onshape is to be used.\\
+    To start, we need to define the variables and constants.
+    \begin{align}%eqn:constants
+    \label{eqn:constants}
+    \begin{split}
+    \diameter&=22mm
+    \\
+    l_{1}&=200mm\\
+    l_{3}&=150mm\\
+    l_{5}&=100mm\\
+    E_{1}&=5\text{ J}\\
+    E_{2}&=7.5\text{ J}\\
+    E_{3}&=10\text{ J}\\
+    \end{split}
+    \end{align}
+    As shown in \eqref{eqn:constants}, The diameter $\diameter$ and length $l$ have been picked according to commonly available materials and for ease of acsess, the lengths picked should also be able to give a wide variety of frequencies.\\
+    Additionally, the material properties of hardened carbon steel are required to run the simulation, shown in \eqref{eqn:steel}, these values were taken from Onshape.
+    \begin{align}%eqn:steel
+    \label{eqn:steel}
+    \begin{split}
+    \rho&=7.850\cdot10^{-6}~\frac{kg}{mm^{3}}\\
+    \nu&=0.292\\
+    E&=200000000000~Pa\\
+    \end{split}
+    \end{align}
+    Where $\rho$ is the Density, $\nu$ is Poisson's ratio and $E$ is Young's Modulus
+    \begin{figure}[h]%fig:VarTable
+    \begin{center}
+    \begin{tabular}{|c||c|c|c|c|}
+    \hline
+    Variable & Length $l$ & Energy $E$ & Deformation $\epsilon$ & Frequency $f$ \\
+    \hline\hline
+    Type & Independent & Independent & Dependent & Dependent \\
+    & Discrete & Discrete & Continuous & Continuous \\
+    \hline
+    Unit & mm & J & mm & hz, s$^{-1}$ \\
+    \hline
+    \end{tabular}
+    \end{center}
+    \caption{The Table Of Variables}\label{fig:VarTable}
+    \end{figure}
+    The Table of variables is as Figure \ref{fig:VarTable}, or in other words, length $l$ and energy $E$ will be changed according to \eqref{eqn:constants} and a seperate simulation will be ran for each.
+
+    To prepare the
+    \begin{figure}[h]%fig:FEAtable
+    \begin{center}
+    \begin{tabular}{|c|c||c|c|}
+    \hline
+    $l$ & $E$ & $f$& $\epsilon$ \\
+    \hline\hline
+    100mm & 5 J & 1536 hz & 1.434 mm \\
+    \hline
+    100mm & 7.5 J & 1536 hz & 1.756mm \\
+    \hline
+    100mm & 10 J & 1536 hz & 2.028mm \\
+    \hline
+    150mm & 5 J & 694.2 hz & 2.601mm \\
+    \hline
+    150mm & 7.5 J & 694.2 hz & 3.185mm \\
+    \hline
+    150mm & 10 J & 694.2 hz & 3.678mm \\
+    \hline
+    200mm & 5 J & 392.9 hz & 3.981mm \\
+    \hline
+    200mm & 7.5 J & 392.9 hz & 4.876mm \\
+    \hline
+    200mm & 10 J & 392.9 hz & 5.63mm \\
+    \hline
+
+
+    \end{tabular}
+    \end{center}
+    \caption{The Table Of Values}\label{fig:FEAtable}
+    \end{figure}
+
+    Since this is a simulation, the uncertainty is nonexistent
+
+
+    \subsection{Experiment}
 
 
 \section{Results And Analysis}%500
@@ -104,8 +197,8 @@ f_{n}\not\sim E_{initial}
 
 \section{Conclusion}%500
 
+\pagebreak
 \addcontentsline{toc}{section}{References}
-
 \printbibliography
 
 
