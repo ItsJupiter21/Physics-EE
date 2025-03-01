@@ -113,7 +113,7 @@ f_{n}\not\sim E_{initial}
 \section{Methodology} \label{Methodology}%700
     \subsection{Theory}\label{Theory}
     \pagebreak
-    \subsection{Finite Element Analysis} \label{FEA}%400
+    \subsection{Finite Element Analysis} \label{FEA}%338, donezo
     As explained in \ref{FEM}, FEA is a method to compute ODEs, and as shown in \ref{Theory} the resonant frequencies of the beam can be calculated with an ODE.
     Thankfully, there exists tools to calculate the FEM built-in on many CAD suites to make the calculations, in this case, PTC's Onshape is to be used.\\
     To start, we need to define the variables and constants.
@@ -243,7 +243,8 @@ f_{n}\not\sim E_{initial}
     \caption{Table of ($\frac{1}{l^{2}}$,$f$) and linear regression}\label{fig:regression}
     \end{center}
     \end{figure}
-    Doing the regression analysis, $f=15226342\frac{1}{l^{2}}+13.9$, or $f\propto\frac{1}{l^{2}}+9.1\times10^{-7}$
+    Doing the regression analysis, $f=15226342\frac{1}{l^{2}}+13.9$, or $f\propto\frac{1}{l^{2}}+9.1\times10^{-7}$ and the coefficient of determination is $R^{2}=0.99998$.\\
+    While the result is offby $9.1\times10^{-7}$, this error is small enough in magnitude to be ignored.
 
 
 
