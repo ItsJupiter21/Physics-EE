@@ -65,7 +65,7 @@
 
 \pagenumbering{arabic}
 
-\section{Introduction}%500rq have 211, maybe 250 more?
+\section{Introduction}\label{Intro}%500rq have 211, maybe 250 more?
 
 Cantilever beams, seemingly simple elements used in construction where one end of a beam is solidly attached and the other loose, has played a major role in engineering, historically,these structures were used for purely mechanical structures, such as buildings, cranes, balconies and bridges.\autocite{BuildingConstructionBook}\\
 While the use of such simple elements is still common in traditional construction, their range of use expands far beyond macroscopic architecture, Nowadays cutting edge technology such as MEMS(micro-electromechanical) systems which integrate mechanical systems with electronics in a microscopic level, use such structures as well, such as microscopic cantilever beams are that are used as inertial sensors in gyroscopes to sense the tiny acceleration forces in various circumstances.\autocite{MemsBook}%Analysis and Design Principles of MEMS Devices
@@ -105,7 +105,7 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
     \centering
     \end{figure}
 
-    \subsection{Fourier Transform} \label{FT}%332, done?
+    \subsection{Fourier Transform} \label{FT}%332, done.
     The Fourier Transform(FT) is a fundamental mathematical technique used to break down time domain functions into their individual frequencies, essentially allowing to break a function down to its individual frequency components, indicating each frequencies amplitude and phase present in the original function.\\
     The mathematical principle behind the Fourier Transform is based on representing signals as a sum of cyclic functions, specifically sine and cosine.
     Any periodic signal is able to be represented as a sum of the sine and cosine functions, each with a unique amplitude and phase. This allows to break down a signal into its individual frequencies.
@@ -115,8 +115,17 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
 
     For the specific purpose of analyzing a sound recording and breaking it down to its individual frequencies, the Fast Fourier Transform provides a direct and efficient way. By transforming the data formatted as pressure-time to the frequency domain, attaining frequency-amplitude data that allows us to see the dominant frequencies making up the signal, and this case, the dominant frequency will be the resonant frequency of the cantilever beam.
 
-\section{Methodology} \label{Methodology}%700
-    \subsection{Theory}\label{Theory}
+\section{Methodology} \label{Methodology}%none
+
+    \subsection{Theory}\label{Theory}%500
+    In Section \ref{BeamTheory}, we explored classic beam theory, which is used to calculate a thin beams deflection with static force, however, in this experiment, the dynamics of an oscillating beam has to be considered, and the aim of this section is to derive equation \eqref{eqn:theory} in Section \ref{Intro} from the Static Beam Equation.\\
+    The Static Beam Equation, as given by \eqref{eqn:SBeamTheory}
+    \begin{equation}\label{eqn:SBeamTheory}
+     \frac{d^{2}}{dx^{2}}(EI\frac{d^{2}w}{dx^{2}})=q
+    \end{equation}
+
+
+
     \subsection{Finite Element Analysis} \label{FEA}%338, donezo
     As explained in Section \ref{FEM}, FEA is a method to compute partial differential equations, and as shown in Section \ref{Theory} the resonant frequencies of the beam can be calculated with an partial differential equation.
     Thankfully, there exists tools to calculate the Finite Element Model built-in on many CAD suites to make the calculations, in this case, PTC's Onshape is to be used.\\
@@ -253,7 +262,7 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
 
 
 
-    \subsection{Experiment}\label{Experiment}
+    \subsection{Experiment}\label{Experiment}%500
 \section{Results And Analysis}\label{ResultsAnalysis}%500
     \subsection{Uncertainty Analysis}
 \section{Discussion}%500
