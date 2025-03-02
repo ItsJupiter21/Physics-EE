@@ -18,8 +18,9 @@
 \graphicspath{ {./images/} }
 
 \pgfplotsset{compat=1.18}
-\renewcommand{\baselinestretch}{1.5}
+\renewcommand{\baselinestretch}{2}
 \renewcommand*\contentsname{Table Of Contents}
+
 \addbibresource{bibliography.bib}
 
 \newcommand{\ResearchQ}{To what extent does changing the length of a circular cantilever beam affect its resonant frequency, and how well can the theoretical model predict this relationship?}
@@ -44,7 +45,7 @@
 
         \vspace{0.8cm}
 
-        Word Count:744
+        Word Count:1987
 
 
     \end{center}
@@ -83,9 +84,14 @@ f_{n}\not\sim E_{initial}
 \end{align}
 I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and show it to be true in Section \ref{FEA} and Section \ref{Experiment} Using computational dynamics and an experiment respectively, and discuss the results, potential errors in methodology and what could be improved in Section \ref{ResultsAnalysis}.
 
-\section{Background Information}%600, 400 left
-    \subsection{Euler–Bernoulli beam theory}\label{BeamTheory}%need 200+
-    \pagebreak
+\section{Background Information}%745rn
+    \subsection{Euler–Bernoulli Beam Theory}\label{BeamTheory}%203
+    To analyze bending of thin beams with axial loads, the Euler–Bernoulli Beam Theory, also known as classic beam theory is commonly used.
+    This theory, forming the basis of a lot of engineering formulae. This theory assumes the beam deformation comes mainly from the bending moment, with a negligible amount of shear deformation. The formula is generally expressed as a fourth order linear differential equation, allowing deflection to be calculated from applied load, flexural rigidity and the loads positioning on the beam. Solving this equation gives the deflection curve, enabling the calculation of stresses, shear forces and bending moments.\autocite{EngMechanics}
+    There lie assumptions behind this theory, including isotropic(same in all directions) material behavior and uniform density which can be assumed true for high carbon steel such as the ones that are that are used in this experiment.\autocite{EngMechanics}
+    As this theorem does not take shear deformation into account, the beam needs to be thin relative to its length so the shear forces become negligible, as such, the size of the beams have been specifically picked to avoid shear forces.
+    As this theorem is only able to calculate static loads, we will further expand it on Section \ref{Theory} to derive the dynamic beam equation.
+
     \subsection{Finite Element Method}\label{FEM}%208rn, "done"
     In engineering, it is common to be faced with partial differential equations, these equations are usually complex and are computationally intense to calculate, for example, calculating heat transfer, fluid flow, or in the case of this paper, non-rigid bodies.
     The Finite Element Method(FEM) is a way method to estimate the result of the partial differential equation, by dividing the continuous space of the problem into smaller, discrete parts called finite elements.\\
@@ -93,23 +99,24 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
     The use of this method of engineering analysis is commonly known as Finite Element Analysis(FEA) and will be used as a virtual experiment in Section \ref{FEA} to simulate the cantilever beams natural frequency.
     As this method allows to simulate deformation of bodies, this tool is generally built into Computer Aided Design(CAD) suites and Onshape, a cloud based CAD suite will be used in this paper.\\
     \begin{figure}[H]
-    \includegraphics[width=0.7\textwidth]{feaexample}
+    \includegraphics[width=0.6\textwidth]{feaexample}
     \centering
     \caption{The result of FEA\autocite{feaexample}}
     \centering
     \end{figure}
 
-    \subsection{Fourier Transform} \label{FT}%200 need
+    \subsection{Fourier Transform} \label{FT}%332, done?
     The Fourier Transform(FT) is a fundamental mathematical technique used to break down time domain functions into their individual frequencies, essentially allowing to break a function down to its individual frequency components, indicating each frequencies amplitude and phase present in the original function.\\
     The mathematical principle behind the Fourier Transform is based on representing signals as a sum of cyclic functions, specifically sine and cosine.
-    Any periodic signal is able to be represented as a sum of the sine and cosine functions, each with a uniqe amplitude and phase. This allows to break down a signal into its individual frequencies.
-%     In practice, continuous data sets cannot be attained, so the Discrete Fourier Transform is used. The Discrete Fourier Transform is the discrete counterpart of the traditional Fourier Transform, allowing it to work on finite data sets such as those attained in experimentation or communications.
-    The Discrete Fourier Transform algorithm transforms a finite, equally spaced set of data in the time domain into a sequence of Discrete Fourier Transform coefficients, each representing the amplitude and frequency that when combined, makes up the signal.
-    One of the major drawbacks of the Discrete Fourier Transform algorithm is its computational intensity, for that, the Fast Fourier Transform is used, the Fast Fourier Transform, instead of being a differential transform, is a computationally optimised recursive algorithm. Allowing for the Discrete Fourier Transform to of a signal to be calculated with much less compute power, this is especially useful for large data sets since the computational complexity of calculating the Discrete Fourier Transform is exponential with the datasets length.\autocite{FFTBook}
+    Any periodic signal is able to be represented as a sum of the sine and cosine functions, each with a unique amplitude and phase. This allows to break down a signal into its individual frequencies.
+    In practice, continuous data sets cannot be attained, so the Discrete Fourier Transform is used. The Discrete Fourier Transform is the discrete counterpart of the traditional Fourier Transform, allowing it to work on finite data sets such as those attained in experimentation or communications.
+    The Discrete Fourier Transform algorithm transforms a finite, equally spaced set of data in the time domain into a sequence of Discrete Fourier Transform coefficients, each representing the amplitude and frequency that when combined, makes up the signal.\\
+    One of the major drawbacks of the Discrete Fourier Transform algorithm is its computational intensity, for that, the Fast Fourier Transform is used, the Fast Fourier Transform, instead of being a differential transform, is a computationally optimized recursive algorithm. Allowing for the Discrete Fourier Transform to of a signal to be calculated with much less compute power, this is especially useful for large data sets since the computational complexity of calculating the Discrete Fourier Transform is exponential with the datasets length.\autocite{FFTBook}
+
+    For the specific purpose of analyzing a sound recording and breaking it down to its individual frequencies, the Fast Fourier Transform provides a direct and efficient way. By transforming the data formatted as pressure-time to the frequency domain, attaining frequency-amplitude data that allows us to see the dominant frequencies making up the signal, and this case, the dominant frequency will be the resonant frequency of the cantilever beam.
 
 \section{Methodology} \label{Methodology}%700
     \subsection{Theory}\label{Theory}
-    \pagebreak
     \subsection{Finite Element Analysis} \label{FEA}%338, donezo
     As explained in Section \ref{FEM}, FEA is a method to compute partial differential equations, and as shown in Section \ref{Theory} the resonant frequencies of the beam can be calculated with an partial differential equation.
     Thankfully, there exists tools to calculate the Finite Element Model built-in on many CAD suites to make the calculations, in this case, PTC's Onshape is to be used.\\
@@ -127,7 +134,7 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
     E_{3}&=10\text{ J}\\
     \end{split}
     \end{align}
-    As shown in \eqref{eqn:constants}, The diameter $\diameter$ and length $l$ have been picked according to commonly available materials and for ease of acsess, the lengths picked should also be able to give a wide variety of frequencies.
+    As shown in \eqref{eqn:constants}, The diameter $\diameter$ and length $l$ have been picked according to commonly available materials and for ease of assess, the lengths picked should also be able to give a wide variety of frequencies.
     Additionally, the material properties of hardened carbon steel are required to run the simulation, shown in \eqref{eqn:steel}, these values were taken from Onshape.
     \begin{align}%eqn:steel
     \label{eqn:steel}
@@ -153,7 +160,7 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
     \end{center}
     \caption{The Table Of Variables}\label{fig:VarTable}
     \end{figure}
-    The Table of variables is as Figure \ref{fig:VarTable}, or in other words, length $l$ and energy $E$ will be changed according to \eqref{eqn:constants} and a seperate simulation will be ran for each.
+    The Table of variables is as Figure \ref{fig:VarTable}, or in other words, length $l$ and energy $E$ will be changed according to \eqref{eqn:constants} and a separate simulation will be ran for each.
     \begin{figure}[H]%fig:CADPic
     \includegraphics[width=0.5\textwidth]{CADPic}
     \centering
@@ -162,11 +169,11 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
     \end{figure}
     To start, a model was created for each length $l$, and was attached to a solid block as a reference frame. The 200mm long one can be seen in Figure \ref{fig:CADPic}
     And for each block, the Finite Element simulation was run 3 times, once per $E$ value.
-    The deformation model for each model can be seen in Figure \ref{fig:FEAPic}, and the readings from the simulation was put into Figure \ref{fig:FEAtable} and as expected, inital energy $E$ shows no correlation with the frequency $f$, and the second part of \eqref{eqn:theory} has been shown true.
+    The deformation model for each model can be seen in Figure \ref{fig:FEAPic}, and the readings from the simulation was put into Figure \ref{fig:FEAtable} and as expected, initial energy $E$ shows no correlation with the frequency $f$, and the second part of \eqref{eqn:theory} has been shown true.
     \begin{figure}[H]%fig:FEAPic
     \includegraphics[width=0.7\textwidth]{FEA3}
     \centering
-    \caption{The result of FEA, With the colours representing Deformation $\epsilon$ in mm.}\label{fig:FEAPic}
+    \caption{The result of FEA, With the colors representing Deformation $\epsilon$ in mm.}\label{fig:FEAPic}
     \centering
     \end{figure}
     \begin{figure}[H]%fig:FEAtable
@@ -208,7 +215,7 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
     \frac{1}{f^{2}}&=\text{mm}^{-2}\\
     \end{split}
     \end{align}
-    According to \eqref{eqn:theory}, $\frac{1}{l^{2}}$ and $f$ should be proportional, in other words, when graphed, the best line of fit should be a straight line crossing the origin, or in mathemacial terms, $f \approx k \frac{1}{l^{2}}$ where $k$ is arbitrary.
+    According to \eqref{eqn:theory}, $\frac{1}{l^{2}}$ and $f$ should be proportional, in other words, when graphed, the best line of fit should be a straight line crossing the origin, or in mathematical terms, $f \approx k \frac{1}{l^{2}}$ where $k$ is arbitrary.
     Doing the regression analysis, using ``LibreOffice Calc'', we get $f=15226342\frac{1}{l^{2}}+13.9$, or $f\propto\frac{1}{l^{2}}+9.1\times10^{-7}$ and the coefficient of determination is $R^{2}=0.99998$ as seen in Figure \ref{fig:regression}\\
     While the result is off by $9.1\times10^{-7}$, this error is small enough in magnitude to be ignored.
     \begin{figure}[H]%fig:regerssion

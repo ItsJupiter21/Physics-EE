@@ -1,6 +1,7 @@
 
 # Get the word count number
-number=$(texcount EE.tex | grep 'Words in text'| grep -o '[0-9]*')
+number=$(pdftotext EE.pdf - | egrep -e '\w\w\w+' | iconv -f ISO-8859-15 -t UTF-8 | wc -w)
+
 
 # Use sed to replace the line in EE.tex
 sed -i "s/        Word Count:.*/        Word Count:${number}/g" EE.tex
