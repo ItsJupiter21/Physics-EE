@@ -49,9 +49,7 @@
 
     \end{center}
 \end{titlepage}
-
 \pagenumbering{Roman}
-
 % Table of Contents
 \tableofcontents
 \addcontentsline{toc}{section}{Table Of Contents}
@@ -68,15 +66,13 @@
 
 \section{Introduction}%500rq have 211, maybe 250 more?
 
-Cantilever beams, seemingly simple elements used in construction where one end of a beam is solidly attached and the other loose, has played a major role in engineering, historically they were used for purely mechanical structures such as buildings, cranes and balconies.
-\autocite{BuildingConstructionBook}\\
-While the use of such simple elements is still common in traditional construction, their utility expands far beyond macroscopic architecture, Nowadays cutting edge technology such as MEMS(micro-electromechanical) systems which integrate mechanical systems with electronics in a microscopic level, use such structures as well, microscopic cantilever beams are being used as inertial sensor in gyroscopes to sense tiny acceleration forces.
-\autocite{MemsBook}%Analysis and Design Principles of MEMS Devices
+Cantilever beams, seemingly simple elements used in construction where one end of a beam is solidly attached and the other loose, has played a major role in engineering, historically,these structures were used for purely mechanical structures, such as buildings, cranes, balconies and bridges.\autocite{BuildingConstructionBook}\\
+While the use of such simple elements is still common in traditional construction, their range of use expands far beyond macroscopic architecture, Nowadays cutting edge technology such as MEMS(micro-electromechanical) systems which integrate mechanical systems with electronics in a microscopic level, use such structures as well, such as microscopic cantilever beams are that are used as inertial sensors in gyroscopes to sense the tiny acceleration forces in various circumstances.\autocite{MemsBook}%Analysis and Design Principles of MEMS Devices
 
 I was fascinated to learn that such simple structures lie at the core of technologies we take for granted today. This pushed me to further investigate their functionality and their dynamic properties. My research question is ``\ResearchQ'' and
-I aim to determine how the length of the beam and the initial energy loaded into the beam will affect the frequency that the beam naturally vibrates at when excited using pure mathematics, Finite Element Analysis and Experimentally.
-As shown in \eqref{eqn:theory}, I am expecting to see the frequency is inversely proportional to the square of its length, and to see no relationship between the frequency and the initial energy load.
-
+I aim to determine how the length of the beam and the initial energy loaded into the beam will affect the frequency that the beam naturally vibrates at when excited using pure mathematics and Experimentally.
+In addition to proving it mathematically and experimentally, I also intend to conduct a virtual experiment, using finite element analysis.
+As shown in \eqref{eqn:theory}, I am expecting to see the frequency is inversely proportional to the square of its length, and to see no meaningful relationship between the frequency and the initial energy load.
 \begin{align}%eqn:theory
 \label{eqn:theory}
 \begin{split}
@@ -85,37 +81,38 @@ f_{n}\propto \frac{1}{l^{2}}
 f_{n}\not\sim E_{initial}
 \end{split}
 \end{align}
-
-
-
-
-
+I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and show it to be true in Section \ref{FEA} and Section \ref{Experiment} Using computational dynamics and an experiment respectively, and discuss the results, potential errors in methodology and what could be improved in Section \ref{ResultsAnalysis}.
 
 \section{Background Information}%600, 400 left
-    \subsection{Fourier Transform} \label{FT}
-    The fourier Transform is a
+    \subsection{Euler–Bernoulli beam theory}\label{BeamTheory}%need 200+
     \pagebreak
     \subsection{Finite Element Method}\label{FEM}%208rn, "done"
-    In engineering, it is common to be faced with partial differential equations(PDE), these equations are usually complex and are computationally intense to calculate, for example, calculating heat transfer, fluid flow, or in the case of this paper, non-rigid bodies.
-    The Finite Element Method(FEM) is a way method to estimate the result of the PDE, by dividing the continuous space of the problem into smaller, discrete parts called finite elements.
-
+    In engineering, it is common to be faced with partial differential equations, these equations are usually complex and are computationally intense to calculate, for example, calculating heat transfer, fluid flow, or in the case of this paper, non-rigid bodies.
+    The Finite Element Method(FEM) is a way method to estimate the result of the partial differential equation, by dividing the continuous space of the problem into smaller, discrete parts called finite elements.\\
     The collection of the finite elements is known as the mesh. By dividing the space, analysis within each element becomes simpler, and later combined to get an estimation, this allows the computation of the differential equations to be computationally simpler. As this is a method of estimation, the results are not always accurate, to get the estimate closer to reality, the mesh resolution is increased at the cost of compute time.\autocite{FEABook} \\
-    The use of this method of engineering analysis is commonly known as Finite Element Analysis(FEA) and will be used as a virtual experiment in \ref{FEA} to simulate the cantilever beams natural frequency.
+    The use of this method of engineering analysis is commonly known as Finite Element Analysis(FEA) and will be used as a virtual experiment in Section \ref{FEA} to simulate the cantilever beams natural frequency.
     As this method allows to simulate deformation of bodies, this tool is generally built into Computer Aided Design(CAD) suites and Onshape, a cloud based CAD suite will be used in this paper.\\
-    \begin{figure}[b]
-    \includegraphics[width=0.56\textwidth]{feaexample}
+    \begin{figure}[H]
+    \includegraphics[width=0.7\textwidth]{feaexample}
     \centering
     \caption{The result of FEA\autocite{feaexample}}
     \centering
     \end{figure}
 
+    \subsection{Fourier Transform} \label{FT}%200 need
+    The Fourier Transform(FT) is a fundamental mathematical technique used to break down time domain functions into their individual frequencies, essentially allowing to break a function down to its individual frequency components, indicating each frequencies amplitude and phase present in the original function.\\
+    The mathematical principle behind the Fourier Transform is based on representing signals as a sum of cyclic functions, specifically sine and cosine.
+    Any periodic signal is able to be represented as a sum of the sine and cosine functions, each with a uniqe amplitude and phase. This allows to break down a signal into its individual frequencies.
+%     In practice, continuous data sets cannot be attained, so the Discrete Fourier Transform is used. The Discrete Fourier Transform is the discrete counterpart of the traditional Fourier Transform, allowing it to work on finite data sets such as those attained in experimentation or communications.
+    The Discrete Fourier Transform algorithm transforms a finite, equally spaced set of data in the time domain into a sequence of Discrete Fourier Transform coefficients, each representing the amplitude and frequency that when combined, makes up the signal.
+    One of the major drawbacks of the Discrete Fourier Transform algorithm is its computational intensity, for that, the Fast Fourier Transform is used, the Fast Fourier Transform, instead of being a differential transform, is a computationally optimised recursive algorithm. Allowing for the Discrete Fourier Transform to of a signal to be calculated with much less compute power, this is especially useful for large data sets since the computational complexity of calculating the Discrete Fourier Transform is exponential with the datasets length.\autocite{FFTBook}
 
 \section{Methodology} \label{Methodology}%700
     \subsection{Theory}\label{Theory}
     \pagebreak
     \subsection{Finite Element Analysis} \label{FEA}%338, donezo
-    As explained in \ref{FEM}, FEA is a method to compute ODEs, and as shown in \ref{Theory} the resonant frequencies of the beam can be calculated with an ODE.
-    Thankfully, there exists tools to calculate the FEM built-in on many CAD suites to make the calculations, in this case, PTC's Onshape is to be used.\\
+    As explained in Section \ref{FEM}, FEA is a method to compute partial differential equations, and as shown in Section \ref{Theory} the resonant frequencies of the beam can be calculated with an partial differential equation.
+    Thankfully, there exists tools to calculate the Finite Element Model built-in on many CAD suites to make the calculations, in this case, PTC's Onshape is to be used.\\
     To start, we need to define the variables and constants.
     \begin{align}%eqn:constants
     \label{eqn:constants}
@@ -164,7 +161,7 @@ f_{n}\not\sim E_{initial}
     \centering
     \end{figure}
     To start, a model was created for each length $l$, and was attached to a solid block as a reference frame. The 200mm long one can be seen in Figure \ref{fig:CADPic}
-    And for each block, the FEA simulation was run 3 times, once per $E$ value.
+    And for each block, the Finite Element simulation was run 3 times, once per $E$ value.
     The deformation model for each model can be seen in Figure \ref{fig:FEAPic}, and the readings from the simulation was put into Figure \ref{fig:FEAtable} and as expected, inital energy $E$ shows no correlation with the frequency $f$, and the second part of \eqref{eqn:theory} has been shown true.
     \begin{figure}[H]%fig:FEAPic
     \includegraphics[width=0.7\textwidth]{FEA3}
@@ -212,6 +209,8 @@ f_{n}\not\sim E_{initial}
     \end{split}
     \end{align}
     According to \eqref{eqn:theory}, $\frac{1}{l^{2}}$ and $f$ should be proportional, in other words, when graphed, the best line of fit should be a straight line crossing the origin, or in mathemacial terms, $f \approx k \frac{1}{l^{2}}$ where $k$ is arbitrary.
+    Doing the regression analysis, using ``LibreOffice Calc'', we get $f=15226342\frac{1}{l^{2}}+13.9$, or $f\propto\frac{1}{l^{2}}+9.1\times10^{-7}$ and the coefficient of determination is $R^{2}=0.99998$ as seen in Figure \ref{fig:regression}\\
+    While the result is off by $9.1\times10^{-7}$, this error is small enough in magnitude to be ignored.
     \begin{figure}[H]%fig:regerssion
     \begin{center}
     \begin{tikzpicture}
@@ -243,13 +242,12 @@ f_{n}\not\sim E_{initial}
     \caption{Table of ($\frac{1}{l^{2}}$,$f$) and linear regression}\label{fig:regression}
     \end{center}
     \end{figure}
-    Doing the regression analysis, $f=15226342\frac{1}{l^{2}}+13.9$, or $f\propto\frac{1}{l^{2}}+9.1\times10^{-7}$ and the coefficient of determination is $R^{2}=0.99998$.\\
-    While the result is offby $9.1\times10^{-7}$, this error is small enough in magnitude to be ignored.
 
 
 
-    \subsection{Experiment}
-\section{Results And Analysis}%500
+
+    \subsection{Experiment}\label{Experiment}
+\section{Results And Analysis}\label{ResultsAnalysis}%500
     \subsection{Uncertainty Analysis}
 \section{Discussion}%500
 \section{Conclusion}%500
