@@ -17,8 +17,8 @@
 %\tikzexternalize
 \graphicspath{ {./images/} }
 
-\pgfplotsset{compat=1.18}
 \renewcommand{\baselinestretch}{2}
+\pgfplotsset{compat=1.18}
 \renewcommand*\contentsname{Table Of Contents}
 
 \addbibresource{bibliography.bib}
@@ -45,7 +45,7 @@
 
         \vspace{0.8cm}
 
-        Word Count:2122
+        Word Count:2951
 
 
     \end{center}
@@ -56,12 +56,6 @@
 \addcontentsline{toc}{section}{Table Of Contents}
 \pagebreak
 
-\begin{abstract}
-\addcontentsline{toc}{section}{Abstract}
-
-    Write something here
-\end{abstract}
-\pagebreak
 
 \pagenumbering{arabic}
 
@@ -226,8 +220,8 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
     \end{align}
     According to \eqref{eqn:theory}, $\frac{1}{l^{2}}$ and $f$ should be proportional, in other words, when graphed, the best line of fit should be a straight line crossing the origin, or in mathematical terms, $f \approx k \frac{1}{l^{2}}$ where $k$ is arbitrary.
     Doing the regression analysis, using ``LibreOffice Calc'', we get $f=15226342\frac{1}{l^{2}}+13.9$, or $f\propto\frac{1}{l^{2}}+9.1\times10^{-7}$ and the coefficient of determination is $R^{2}=0.99998$ as seen in Figure \ref{fig:regression}\\
-    While the result is off by $9.1\times10^{-7}$, this error is small enough in magnitude to be ignored.
-    \begin{figure}[H]%fig:regerssion
+    While the result is off by $9.1\times10^{-7}$, this error is small enough in magnitude to be negligible.
+    \begin{figure}[H]%fig:regression
     \begin{center}
     \begin{tikzpicture}
     \begin{axis}[
@@ -260,9 +254,152 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
     \end{figure}
 
 
-
-
     \subsection{Experiment}\label{Experiment}%500
+    As shown in Section \ref{FEA}, the results of the Finite Element Analysis follow the expected relation in Section \ref{Theory}. And thus, this experiment aims to replicate the simulation setup used previously, and show that (a) The natural frequency values match those from Figure \ref{fig:FEAtable} and (b) the natural frequency follows the model as shown in equation \eqref{eqn:theory}.\\
+    The material of the experiment is shown in Figure \ref{fig:materials}. And the initial energy loaded into the material will be controlled by the height of the hammer $h$ as given by the gravitational potential energy, as shown in \eqref{eqn:mgh}.
+    \begin{figure}[H]%fig:materials
+    \begin{equation}\label{eqn:mgh}
+     E=mgh
+    \end{equation}
+    To calculate the energy of the hammer, $m=2\text{ kg}$ and $g=9.81\text{ms}^{-1}$ is substituted in \eqref{eqn:mgh} to get \eqref{eqn:hammerE}, additionally, the units of $h$ has been converted to meters.
+    \begin{align}%eqn:hammerE
+    \label{eqn:hammerE}
+    \begin{split}
+     E&=\frac{h}{1000}~9.81\times2\\
+     E&=0.01962h \text{ J}
+    \end{split}
+    \end{align}
+
+    \begin{center}
+    \begin{tabular}[H]{|c|c|c|c|}
+    \hline
+    1 & 2 & 3 & 4\\
+    \hline
+    Metal Bar & Hammer & Vise & Sound Recorder\\
+    \hline
+    \end{tabular}
+    \end{center}
+    \caption{The Materials Used in The Experiment}\label{fig:materials}
+    \end{figure}
+    The Table Of variables as seen in  Figure \ref{fig:ExpVarTable} is similar to Figure \ref{fig:VarTable}  found in Section \ref{FEA} but a few changes were made to facilitate the experiment, notably, the deformation of the material $\epsilon$ is no longer measured, because of the difficulty that arises from trying to measure it while leaving frequency $f$ unaffected. And finally, hammer height has been added as a variable, this is the method for controlling the initial energy load $E$ for the analysis.\\
+    The same values for $\diameter$, $l$ and $E$ will be used as \eqref{eqn:constants} in Section \ref{FEA}, the values for $h$ will be calculated according to \eqref{eqn:hammerE}, shown in \eqref{eqn:hvals}.
+
+    \begin{align}%eqn:hvals
+    \label{eqn:hvals}
+    \begin{split}
+     5 \text{ J}&=0.01962h_1\\
+     h_1&=254.8\text{ mm}\\
+     h_2&=382.2\text{ mm}\\
+     h_3&=509,6\text{ mm}\\
+    \end{split}
+    \end{align}
+
+
+    \begin{figure}[H]%fig:ExpVarTable
+    \begin{center}
+    \begin{tabular}[H]{|c|c|c|c||c|}
+    \hline
+    Variable & Length $l$  & Energy $E$  & Hammer Height $h$ & Frequency $f$ \\
+    \hline\hline
+    Type     & Independent & Independent & Independent     & Dependent  \\
+             & Discrete    & Discrete    & Discrete        & Continuous  \\
+    \hline
+    Unit     & mm          & J           & mm              & hz, s$^{-1}$ \\
+    \hline
+    Control  & Calipers    & Calculated from $h$ & Calipers&  Fourier Transform\\
+    \hline
+    \end{tabular}
+    \end{center}
+    \caption{The Table Of Variables}\label{fig:ExpVarTable}
+    \end{figure}
+    The setup of the experiment is shown in Figure \ref{fig:EXPPic}, the height of the hammer is specifically chosen so the corner of the hammer hits the corner of the metal bar, to ensure the bar is excited the same way every time.
+
+    \begin{figure}[H]%fig:EXPPic
+    \includegraphics[width=0.8\textwidth]{setup+diag}
+    \centering
+    \caption{The Test Setup}\label{fig:EXPPic}
+    \end{figure}
+    To analyze the data, the Fast Fourier Transform was used, as explained in Section \ref{FT}, to convert the time-pressure graphs, also known as waveforms from the sound recording, such as the one seen in Figure \ref{fig:recPic} into the frequency domain, as shown in Figure \ref{fig:FFTPic}
+
+    \begin{figure}[H]%fig:recPic
+    \includegraphics[width=0.9\textwidth]{Recording}
+    \centering
+    \caption{The Waveform From $E=10$ J and $l=200$ mm}\label{fig:recPic}
+    \end{figure}
+    For consistency, a 1 second section following the immediate peak(caused by the initial collision with the hammer) was taken from each recording, and that specific section was put through the FFT algorithm.\\
+    \begin{figure}[H]%fig:FFPTPic
+    \includegraphics[width=0.8\textwidth]{FFTImage}
+    \centering
+    \caption{Recording Converted to Frequency Domain Using The FFT, There is a peak at 334 hz.}\label{fig:FFTPic}
+    \end{figure}
+    Each set of length and energy was ran 3 times to determine the magnitude of random error in the experiment. After putting every single recording through the Fast Fourier Transform algorithm and picking the peak frequency for each one, the results are seen in Figure \ref{fig:TableResults}.
+
+    \begin{figure}[H]%fig:TableResults
+    \begin{center}
+    \begin{tabular}[H]{|c|c|c||c|c|c|c|}
+    \hline
+    $l$ & $\frac{1}{l^2}$ & $E$ & $f_1$ & $f_2$ & $f_3$ & $f_{mean}$  \\
+    \hline\hline
+    100mm & $10^{-4}~mm^{-2}$ & 5 J & 956 hz & 913 hz & 907 hz & $925\pm2.98$ hz \\
+    \hline
+    100mm & $10^{-4}~mm^{-2}$ & 7.5 J & 913 hz & 933 hz & 936 hz & $927\pm2.04$ hz \\
+    \hline
+    100mm & $10^{-4}~mm^{-2}$ & 10 J & 914 hz & 927 hz & 895 hz &$912\pm2.32$ hz \\
+    \hline
+    150mm & $10^{-4}~mm^{-2}$ & 5 J & 563 hz & 539 hz & 563 hz &$555\pm2.15$ hz \\
+    \hline
+    150mm & $10^{-4}~mm^{-2}$ & 7.5 J & 536 hz & 539 hz & 564 hz &$546\pm2.26$ hz \\
+    \hline
+    150mm & $10^{-4}~mm^{-2}$ & 10 J & 540 hz & 534 hz & 540 hz &$538\pm1.07$ hz \\
+    \hline
+    200mm & $10^{-4}~mm^{-2}$ & 5 J & 335 hz & 335 hz & 324 hz &$331\pm1.45$ hz \\
+    \hline
+    200mm & $10^{-4}~mm^{-2}$ & 7.5 J & 335 hz & 334 hz & 334 hz &$334\pm0.44$ hz \\
+    \hline
+    200mm & $10^{-4}~mm^{-2}$ & 10 J & 334 hz & 334 hz & 332 hz &$333\pm0.62$ hz \\
+    \hline
+    \end{tabular}
+    \end{center}
+    \caption{The Results Of the Experiment}\label{fig:TableResults}
+    \end{figure}
+    Looking at Figure \ref{fig:TableResults}, It is clear that $E$ and $f$ have no relation, as suggested in \eqref{eqn:theory} and simulated in Section \ref{FEA}, with this, every subsequent section will only take recordings where $E=10$ J into account.
+
+    In a similar manner to Figure \ref{fig:regression}, the data in Figure \ref{fig:TableResults} has been graphed and a linear fit line has been calculated, and shown in Figure \ref{fig:EXPregression}.
+
+    \begin{figure}[H]%fig:EXPregerssion
+    \begin{center}
+    \begin{tikzpicture}
+    \begin{axis}[
+        xlabel={$\frac{1}{l^{2}}$ [mm$^-2$]},
+        ylabel={Frequency $f$ [hz]},
+        legend pos=north west,
+        ymajorgrids=true,
+        grid style=dashed,
+    ]
+    \addplot [
+        domain=2.5e-5:1e-4,
+        samples=100,
+        color=red,
+        ]
+        {7605636.67232598*x + 170.755};
+    \addlegendentry{Linear Fit}
+    \addplot+[
+        only marks,
+        color=red,
+        mark=o,
+        ]
+        coordinates {
+        (1e-4,921.56)(4.44e-5,546.44)(2.5e-5,333)
+        };
+    \end{axis}
+    \end{tikzpicture}
+
+    \caption{Table of ($\frac{1}{l^{2}}$,$f$) and linear regression}\label{fig:EXPregression}
+    \end{center}
+    \end{figure}
+    From the analysis, the values $R^2=0.97809$ and $f=7605636\frac{1}{l^{2}}+170$ were acquired, or transformed to $f\propto\frac{1}{l^{2}}+2.2\times10^{-5}$\\
+    While the result is once again, off by $2.2\times10^{-5}$, it is small enough to be negligible.
+
 \section{Results And Analysis}\label{ResultsAnalysis}%500
     \subsection{Uncertainty Analysis}
 \section{Discussion}%500
