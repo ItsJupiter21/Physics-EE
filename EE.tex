@@ -12,9 +12,6 @@
 \usepackage{wasysym}
 \usepackage{float}
 \usepackage{pgfplots}
-
-%\usepgfplotslibrary{external}
-%\tikzexternalize
 \graphicspath{ {./images/} }
 
 \renewcommand{\baselinestretch}{2}
@@ -32,7 +29,7 @@
     \begin{center}
         \vspace*{1cm}
 
-        \textbf{Investigating Factors Affecting the Resonant Frequency of Cantilever Beams}\\
+        \large{\textbf{Investigating Factors Affecting the Resonant Frequency of Cantilever Beams}}\\
 
         \vspace{.5cm}
         \textbf{Research Question:}
@@ -45,7 +42,7 @@
 
         \vspace{0.8cm}
 
-        Word Count:3194
+        Word Count:3870
 
 
     \end{center}
@@ -59,7 +56,7 @@
 
 \pagenumbering{arabic}
 
-\section{Introduction}\label{Intro}%500rq have 211, maybe 250 more?
+\section{Introduction}\label{Intro}%280.
 
 Cantilever beams, seemingly simple elements used in construction where one end of a beam is solidly attached and the other loose, has played a major role in engineering, historically,these structures were used for purely mechanical structures, such as buildings, cranes, balconies and bridges.\autocite{BuildingConstructionBook}\\
 While the use of such simple elements is still common in traditional construction, their range of use expands far beyond macroscopic architecture, Nowadays cutting edge technology such as MEMS(micro-electromechanical) systems which integrate mechanical systems with electronics in a microscopic level, use such structures as well, such as microscopic cantilever beams are that are used as inertial sensors in gyroscopes to sense the tiny acceleration forces in various circumstances.\autocite{MemsBook}%Analysis and Design Principles of MEMS Devices
@@ -78,28 +75,22 @@ f_{n}\not\sim E_{initial}
 \end{align}
 I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and show it to be true in Section \ref{FEA} and Section \ref{Experiment} Using computational dynamics and an experiment respectively, and discuss the results, potential errors in methodology and what could be improved in Section \ref{ResultsAnalysis}.
 
-\section{Background Information}%745rn
-    \subsection{Euler–Bernoulli Beam Theory}\label{BeamTheory}%203
+\section{Background Information}%745.
+    \subsection{Euler–Bernoulli Beam Theory}\label{BeamTheory}%203.
     To analyze bending of thin beams with axial loads, the Euler–Bernoulli Beam Theory, also known as classic beam theory is commonly used.
     This theory, forming the basis of a lot of engineering formulae. This theory assumes the beam deformation comes mainly from the bending moment, with a negligible amount of shear deformation. The formula is generally expressed as a fourth order linear differential equation, allowing deflection to be calculated from applied load, flexural rigidity and the loads positioning on the beam. Solving this equation gives the deflection curve, enabling the calculation of stresses, shear forces and bending moments.\autocite{EngMechanics}
     There lie assumptions behind this theory, including isotropic(same in all directions) material behavior and uniform density which can be assumed true for high carbon steel such as the ones that are that are used in this experiment.\autocite{EngMechanics}
     As this theorem does not take shear deformation into account, the beam needs to be thin relative to its length so the shear forces become negligible, as such, the size of the beams have been specifically picked to avoid shear forces.
     As this theorem is only able to calculate static loads, we will further expand it on Section \ref{Theory} to derive the dynamic beam equation.
 
-    \subsection{Finite Element Method}\label{FEM}%208rn, "done"
+    \subsection{Finite Element Method}\label{FEM}%210.
     In engineering, it is common to be faced with partial differential equations, these equations are usually complex and are computationally intense to calculate, for example, calculating heat transfer, fluid flow, or in the case of this paper, non-rigid bodies.
     The Finite Element Method(FEM) is a way method to estimate the result of the partial differential equation, by dividing the continuous space of the problem into smaller, discrete parts called finite elements.\\
     The collection of the finite elements is known as the mesh. By dividing the space, analysis within each element becomes simpler, and later combined to get an estimation, this allows the computation of the differential equations to be computationally simpler. As this is a method of estimation, the results are not always accurate, to get the estimate closer to reality, the mesh resolution is increased at the cost of compute time.\autocite{FEABook} \\
     The use of this method of engineering analysis is commonly known as Finite Element Analysis(FEA) and will be used as a virtual experiment in Section \ref{FEA} to simulate the cantilever beams natural frequency.
     As this method allows to simulate deformation of bodies, this tool is generally built into Computer Aided Design(CAD) suites and Onshape, a cloud based CAD suite will be used in this paper.\\
-    \begin{figure}[H]
-    \includegraphics[width=0.6\textwidth]{feaexample}
-    \centering
-    \caption{The result of FEA\autocite{feaexample}}
-    \centering
-    \end{figure}
 
-    \subsection{Fourier Transform} \label{FT}%332, done.
+    \subsection{Fourier Transform} \label{FT}%332.
     The Fourier Transform(FT) is a fundamental mathematical technique used to break down time domain functions into their individual frequencies, essentially allowing to break a function down to its individual frequency components, indicating each frequencies amplitude and phase present in the original function.\\
     The mathematical principle behind the Fourier Transform is based on representing signals as a sum of cyclic functions, specifically sine and cosine.
     Any periodic signal is able to be represented as a sum of the sine and cosine functions, each with a unique amplitude and phase. This allows to break down a signal into its individual frequencies.
@@ -109,9 +100,9 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
 
     For the specific purpose of analyzing a sound recording and breaking it down to its individual frequencies, the Fast Fourier Transform provides a direct and efficient way. By transforming the data formatted as pressure-time to the frequency domain, attaining frequency-amplitude data that allows us to see the dominant frequencies making up the signal, and this case, the dominant frequency will be the resonant frequency of the cantilever beam.
 
-\section{Methodology} \label{Methodology}%none
+\section{Methodology} \label{Methodology}%999
 
-    \subsection{Theory}\label{Theory}%500
+    \subsection{Theory}\label{Theory}%210
 
     In Section \ref{BeamTheory},the static beam theory was introduced. Now, to determine the relationship for the resonant frequency of a cantilever beam, will be derived aiming to show its inverse square proportionality to length and independence from initial energy, as hypothesized in \eqref{eqn:theory}.
 
@@ -141,7 +132,7 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
 
     Regarding the second part of the hypothesis, frequency is a property of the system, determined by material and dimensions. Initial energy affects vibration amplitude, not frequency. The frequency is set by length. Thus, resonant frequency is theoretically independent of initial energy, supporting the hypothesis. $f_{n}\not\sim E_{initial}$. \autocite{EngMechanics}
 
-    \subsection{Finite Element Analysis} \label{FEA}%338, donezo
+    \subsection{Finite Element Analysis} \label{FEA}%360.
     As explained in Section \ref{FEM}, FEA is a method to compute partial differential equations, and as shown in Section \ref{Theory} the resonant frequencies of the beam can be calculated with an partial differential equation.
     Thankfully, there exists tools to calculate the Finite Element Model built-in on many CAD suites to make the calculations, in this case, PTC's Onshape is to be used.\\
     To start, we need to define the variables and constants.
@@ -275,7 +266,7 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
     \end{figure}
 
 
-    \subsection{Experiment}\label{Experiment}%500
+    \subsection{Experiment}\label{Experiment}%429.
     As shown in Section \ref{FEA}, the results of the Finite Element Analysis follow the expected relation in Section \ref{Theory}. And thus, this experiment aims to replicate the simulation setup used previously, and show that (a) The natural frequency values match those from Figure \ref{fig:FEAtable} and (b) the natural frequency follows the model as shown in equation \eqref{eqn:theory}.\\
     The material of the experiment is shown in Figure \ref{fig:materials}. And the initial energy loaded into the material will be controlled by the height of the hammer $h$ as given by the gravitational potential energy, as shown in \eqref{eqn:mgh}.
     \begin{figure}[H]%fig:materials
@@ -386,6 +377,8 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
     Looking at Figure \ref{fig:TableResults}, It is clear that $E$ and $f$ have no relation, as suggested in \eqref{eqn:theory} and simulated in Section \ref{FEA}, with this, every subsequent section will only take recordings where $E=10$ J into account.
 
     In a similar manner to Figure \ref{fig:regression}, the data in Figure \ref{fig:TableResults} has been graphed and a linear fit line has been calculated, and shown in Figure \ref{fig:EXPregression}.
+    From the analysis, the values $R^2=0.97809$ showing strong correlation and $f=7605636\frac{1}{l^{2}}+170$ were acquired, or transformed to $f\propto\frac{1}{l^{2}}+2.2\times10^{-5}$\\
+    While the result is once again, off by $2.2\times10^{-5}$, it is small enough to be negligible.
 
     \begin{figure}[H]%fig:EXPregerssion
     \begin{center}
@@ -418,13 +411,33 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
     \caption{Table of ($\frac{1}{l^{2}}$,$f$) and linear regression}\label{fig:EXPregression}
     \end{center}
     \end{figure}
-    From the analysis, the values $R^2=0.97809$ showing strong correlation and $f=7605636\frac{1}{l^{2}}+170$ were acquired, or transformed to $f\propto\frac{1}{l^{2}}+2.2\times10^{-5}$\\
-    While the result is once again, off by $2.2\times10^{-5}$, it is small enough to be negligible.
 
-\section{Results And Analysis}\label{ResultsAnalysis}%500
-    \subsection{Uncertainty Analysis}
-\section{Discussion}%500
-\section{Conclusion}%500
+\section{Results And Analysis}\label{ResultsAnalysis}%need 200
+    \subsection{Uncertainty Analysis}%need 200
+    In both Section \ref{FEA} and Section \ref{Experiment}, Where the same experiment was conducted on a simulation and a physical experiment, there exists several sources of uncertainty that can influence the results.  For the Finite Element Analysis, the primary source is the mesh resolution. Since Onshape automatically generates the mesh, the level of refinement and its impact on frequency values was not systematically investigated. According to Onshape, the ``Variance of frequency analysis is within 0.1 hz for simple structures''.\\
+    The  Material properties used in the analysis are nominal values for the hardened carbon steel material and the actual material properties of the physical beams used might have some small differences, contributing to systematic error. The boundary conditions in simulation are idealized as perfectly fixed, while in reality, the vise has introduced some compliance and damping, as it can be seen from Figure \ref{fig:recPic}, the magnitude of the noise quickly decreases, also contributing to the systematic error not found in the idealized simulation.
+
+    In the experiment, length measurements using calipers have a precision limit, while relatively tiny, it introduces a small uncertainty in $1/l^2$ values.
+    Controlling the initial energy was also dependent on the mass and the height measurements of the hammer, but consistency in hammer drop and energy transfer is imperfect and it also introduced some random error.
+    The rigidity of the vise and the damping at the fixture point also has also introduce additional random uncertainties.
+    Finally, identifying the resonant frequency from the Fourier Transform plots involves a degree of subjectivity and precision limitations in peak frequency determination.
+    These uncertainties, from both FEA and experiment, should be considered when interpreting and comparing the results, and were included in the Tables and values where possible.
+
+\section{Discussion}% need 200
+
+The findings from both the simulation and experimental methods generally support the hypothesis, that the resonant frequency of a the beam is inversely proportional to the square of its length and is independent of the initial energy.  Regression analysis of both the simulation and experimental data gave high $R^2$ values, 0.99998 and 0.97809 respectively, for the linear relationship between frequency and $1/l^2$, indicating a strong correlation. However, the experimental frequencies are consistently lower than those predicted by the simulation for each set of beams. This discrepancy could be attributed to systematic error, coming from factors including material property variations, the imperfect vise fixture in the experiment, and also the imperfect Fourier Transform.
+
+The nonzero Y axis intercept in both the simulation and experiment(13.9 and 170 respectively), an order of magnitude larger on the experiment, suggests a systematic error on both. This indicates an underestimation of frequency at longer lengths, or might reflect limitations of the simple linear model at lower frequencies.
+The near-negligible effect of initial energy on resonant frequency was confirmed by both FEA and experiment, matching the theory. The systematic error could also be caused by the width of the beam being non-negligible width.
+
+To improve this investigation, the experimental setup could be improved for more consistent energy input and fixture rigidity. other studies could explore beams of different materials or cross-sections to test the broader applicability of the observed relationships, and additionally could individually test material properties for it to match the simulation more closely.
+
+
+\section{Conclusion}% need 200
+
+This investigation aimed to determine the amount to which the length of a circular cantilever beam would affect its resonant frequency and to show the capability of the theoretical model. Both Finite Element Analysis and experimental results demonstrate a clear relationship between the resonant frequency and the length of the beam, supporting the theoretical prediction and the first part of the research hypothesis.  The initial impact energy was shown to have a no predictable effect on the frequency, confirming the second part of the hypothesis as well.
+
+The theoretical model, implemented through Finite Element Analysis, provides an accurate prediction of the resonant frequency behavior with varying length, although it seems to overestimate the frequency values compared to experimental results. In answer to the research question, changing the length significantly affects the resonant frequency in a predictable manner, and the hypothesis this relationship, with the possibility for further improvement in both simulation parameters and experimental methodology. Future work should aim to adress the identified limitations to further confirm and refine the understanding of the cantilever beam dynamics.
 
 \pagebreak
 \addcontentsline{toc}{section}{References}
@@ -432,4 +445,9 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
 
 
 \end{document}
+
+
+
+
+
 
