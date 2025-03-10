@@ -14,5 +14,6 @@ Even though the progress of the essay was slowed down by factors out of my contr
 
 - **Final Meeting** 198 words
 - Date: 23/02/2025
+
 The schedule is on fire, the deadline creeps closer and I cannot do anything but focus on other things, I honestly believe that the scheduling is the weakest part of my extended essay, and the root cause of many more issues. Even though I started early, the progress just wasn't quick enough. Even then, I am glad to have written in this topic, learning about things I will eventually learn in university, essentially giving me an advantage in the future, this also gave an opportunity to improve my 3d modelling skills, one that I was unable to find the time for otherwise. Frankly, the 3 lengths of beams I have used, while confirming the theory, is not enough to draw any full conclusions, so I would definitely like to re-do the experiment with more samples, and maybe a thinner bar, since I believe that's one of the biggest reasons for the small discrepancy from the theory.
 While writing, I found that working at night was the most effective for me, especially at the weekends to not mess up my sleeping schedule, the lack of distractions and the fact that I don't have any distractions improves my efficiency greatly.
