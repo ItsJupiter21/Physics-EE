@@ -1,3 +1,6 @@
+- Candidate Personal code: lqj566
+- Supervisor Initials: GT
+
 - **First Meeting** 168 words
 - Date: 10/04/2024
 
