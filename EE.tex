@@ -45,7 +45,7 @@
 
         \vspace{0.8cm}
 
-        Word Count:2951
+        Word Count:3194
 
 
     \end{center}
@@ -112,13 +112,34 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
 \section{Methodology} \label{Methodology}%none
 
     \subsection{Theory}\label{Theory}%500
-    In Section \ref{BeamTheory}, we explored classic beam theory, which is used to calculate a thin beams deflection with static force, however, in this experiment, the dynamics of an oscillating beam has to be considered, and the aim of this section is to derive equation \eqref{eqn:theory} in Section \ref{Intro} from the Static Beam Equation.\\
-    The Static Beam Equation, as given by \eqref{eqn:SBeamTheory}
-    \begin{equation}\label{eqn:SBeamTheory}
-     \frac{d^{2}}{dx^{2}}(EI\frac{d^{2}w}{dx^{2}})=q
+
+    In Section \ref{BeamTheory},the static beam theory was introduced. Now, to determine the relationship for the resonant frequency of a cantilever beam, will be derived aiming to show its inverse square proportionality to length and independence from initial energy, as hypothesized in \eqref{eqn:theory}.
+
+    Starting with the Static Beam Equation \eqref{eqn:SBeamTheory}:
+    \begin{equation}\label{eqn:SBeamTheory_short}
+    \frac{d^{2}}{dx^{2}}(EI\frac{d^{2}w}{dx^{2}})=q(x)
     \end{equation}
+    To consider dynamics, the static load $q(x)$ is replaced with the inertial force per unit length, $-\rho A \frac{\partial^2 w(x,t)}{\partial t^2}$, leading to the Dynamic Beam Equation for unconstrained vibration:
+    \begin{equation}\label{eqn:DBeamTheory_short}
+    EI\frac{\partial^{4}w(x,t)}{\partial x^{4}} + \rho A \frac{\partial^2 w(x,t)}{\partial t^2} = 0
+    \end{equation}
+    assuming constant flexural rigidity $EI$.  For natural frequencies, harmonic motion is assumed as: $w(x,t) = W(x) \cos(\omega t)$. Substituting this into \eqref{eqn:DBeamTheory_short} and simplifying gives the spatial ordinary differential equation:
+    \begin{equation}\label{eqn:SpatialODE_short}
+    EI\frac{d^{4}W(x)}{d x^{4}} - \rho A \omega^2 W(x) = 0
+    \end{equation}
+    Letting $\beta^4 = \frac{\rho A \omega^2}{EI}$:
+    \begin{equation}\label{eqn:SpatialODE_simple_short}
+    \frac{d^{4}W(x)}{d x^{4}} - \beta^4 W(x) = 0
+    \end{equation}
+    For a cantilever beam, boundary conditions are: at the fixed end ($x=0$), $W(0) = 0$ and $W'(0) = 0$; at the free end ($x=l$), $W''(l) = 0$ and $W'''(l) = 0$. Solving this eigenvalue problem gives solutions for specific $\beta$ values, determining natural frequencies $\omega_n$.  For the fundamental mode, $\beta_1 l \approx 1.875$.
 
+    Since $\beta^4 = \frac{\rho A \omega^2}{EI} = \frac{\rho A (2\pi f)^2}{EI}$, we have $\beta \propto \sqrt{f}$. Combined with $\beta_1 l \approx \text{constant}$, this leads to $\sqrt{f_1} l \approx \text{constant}$, and squaring both sides gives:
+    \begin{equation}\label{eqn:frequency_length_inverse_square_short}
+    f_1 \propto \frac{1}{l^2}
+    \end{equation}
+    This confirms the relationship between frequency $f$ and length. The proportionality constant depends on material ($E, \rho$) and geometry ($I, A$),and is kept constant in throughout the experiments.
 
+    Regarding the second part of the hypothesis, frequency is a property of the system, determined by material and dimensions. Initial energy affects vibration amplitude, not frequency. The frequency is set by length. Thus, resonant frequency is theoretically independent of initial energy, supporting the hypothesis. $f_{n}\not\sim E_{initial}$. \autocite{EngMechanics}
 
     \subsection{Finite Element Analysis} \label{FEA}%338, donezo
     As explained in Section \ref{FEM}, FEA is a method to compute partial differential equations, and as shown in Section \ref{Theory} the resonant frequencies of the beam can be calculated with an partial differential equation.
@@ -219,7 +240,7 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
     \end{split}
     \end{align}
     According to \eqref{eqn:theory}, $\frac{1}{l^{2}}$ and $f$ should be proportional, in other words, when graphed, the best line of fit should be a straight line crossing the origin, or in mathematical terms, $f \approx k \frac{1}{l^{2}}$ where $k$ is arbitrary.
-    Doing the regression analysis, using ``LibreOffice Calc'', we get $f=15226342\frac{1}{l^{2}}+13.9$, or $f\propto\frac{1}{l^{2}}+9.1\times10^{-7}$ and the coefficient of determination is $R^{2}=0.99998$ as seen in Figure \ref{fig:regression}\\
+    Doing the regression analysis, using ``LibreOffice Calc'', we get $f=15226342\frac{1}{l^{2}}+13.9$, or $f\propto\frac{1}{l^{2}}+9.1\times10^{-7}$ and the coefficient of determination is $R^{2}=0.99998$, showing strong correlation as seen in Figure \ref{fig:regression}\\
     While the result is off by $9.1\times10^{-7}$, this error is small enough in magnitude to be negligible.
     \begin{figure}[H]%fig:regression
     \begin{center}
@@ -397,7 +418,7 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
     \caption{Table of ($\frac{1}{l^{2}}$,$f$) and linear regression}\label{fig:EXPregression}
     \end{center}
     \end{figure}
-    From the analysis, the values $R^2=0.97809$ and $f=7605636\frac{1}{l^{2}}+170$ were acquired, or transformed to $f\propto\frac{1}{l^{2}}+2.2\times10^{-5}$\\
+    From the analysis, the values $R^2=0.97809$ showing strong correlation and $f=7605636\frac{1}{l^{2}}+170$ were acquired, or transformed to $f\propto\frac{1}{l^{2}}+2.2\times10^{-5}$\\
     While the result is once again, off by $2.2\times10^{-5}$, it is small enough to be negligible.
 
 \section{Results And Analysis}\label{ResultsAnalysis}%500
