@@ -2,7 +2,7 @@
 \usepackage[parfill]{parskip}
 \usepackage[utf8]{inputenc}
 \usepackage[style=authoryear,backend=biber]{biblatex}
-\usepackage[a4paper, margin=2.5cm]{geometry}
+\usepackage[a4paper, margin=2.4cm]{geometry}
 
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -16,7 +16,7 @@
 
 \graphicspath{ {./images/} }
 
-\renewcommand{\baselinestretch}{1.5}
+\renewcommand{\baselinestretch}{2}
 \pgfplotsset{compat=1.18}
 \renewcommand*\contentsname{Table Of Contents}
 
@@ -113,11 +113,13 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
     \begin{equation}\label{eqn:SBeamTheory}
     \frac{d^{2}}{dx^{2}}(EI\frac{d^{2}w}{dx^{2}})=q(x)
     \end{equation}
+    Where $x$ is the point along the beam, $E$ is the Young's modulus, $I$ is the second moment of area and $q(x)$ is the force applied to the model at point $x$\\
     To consider dynamics, the static load $q(x)$ is replaced with the inertial force per unit length, $-\rho A \frac{\partial^2 w(x,t)}{\partial t^2}$, leading to the Dynamic Beam Equation for unconstrained vibration:
     \begin{equation}\label{eqn:DBeamTheory_short}
     EI\frac{\partial^{4}w(x,t)}{\partial x^{4}} + \rho A \frac{\partial^2 w(x,t)}{\partial t^2} = 0
     \end{equation}
-    assuming constant flexural rigidity $EI$.  For natural frequencies, harmonic motion is assumed as: $w(x,t) = W(x) \cos(\omega t)$. Substituting this into \eqref{eqn:DBeamTheory_short} and simplifying gives the spatial ordinary differential equation:
+
+    Assuming constant flexural rigidity $EI$.  For natural frequencies, harmonic motion is assumed as: $w(x,t) = W(x) \cos(\omega t)$, where $\omega$ is the angular velocity. Substituting this into \eqref{eqn:DBeamTheory_short} and simplifying gives the spatial ordinary differential equation:
     \begin{equation}\label{eqn:SpatialODE_short}
     EI\frac{d^{4}W(x)}{d x^{4}} - \rho A \omega^2 W(x) = 0
     \end{equation}
@@ -125,15 +127,17 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
     \begin{equation}\label{eqn:SpatialODE_simple_short}
     \frac{d^{4}W(x)}{d x^{4}} - \beta^4 W(x) = 0
     \end{equation}
+    Where $\beta$ is the spatial frequency parameter.\\
     For a cantilever beam, boundary conditions are: at the fixed end ($x=0$), $W(0) = 0$ and $W'(0) = 0$; at the free end ($x=l$), $W''(l) = 0$ and $W'''(l) = 0$. Solving this eigenvalue problem gives solutions for specific $\beta$ values, determining natural frequencies $\omega_n$.  For the fundamental mode, $\beta_1 l \approx 1.875$.
 
-    Since $\beta^4 = \frac{\rho A \omega^2}{EI} = \frac{\rho A (2\pi f)^2}{EI}$, we have $\beta \propto \sqrt{f}$. Combined with $\beta_1 l \approx \text{constant}$, this leads to $\sqrt{f_1} l \approx \text{constant}$, and squaring both sides gives:
+    Since $\beta^4 = \frac{\rho A \omega^2}{EI} = \frac{\rho A (2\pi f)^2}{EI}$, we have $\beta \propto \sqrt{f}$ with frequency $f$. Combined with $\beta_1 l \approx \text{constant}$, this leads to $\sqrt{f_1} l \approx \text{constant}$, and squaring both sides gives:
     \begin{equation}\label{eqn:frequency_length_inverse_square_short}
     f_1 \propto \frac{1}{l^2}
     \end{equation}
-    This confirms the relationship between frequency $f$ and length. The proportionality constant depends on material ($E, \rho$) and geometry ($I, A$),and is kept constant in throughout the experiments.
+    This confirms the relationship between frequency $f$ and length $l$. The proportionality constant depends on material ($E, \rho$) and geometry ($I, A$),and is kept constant in throughout the experiments.
 
-    Regarding the second part of the hypothesis, frequency is a property of the system, determined by material and dimensions. Initial energy affects vibration amplitude, not frequency. The frequency is set by length. Thus, resonant frequency is theoretically independent of initial energy, supporting the hypothesis. $f_{n}\not\sim E_{initial}$ \autocite{EngMechanics}.
+    Regarding the second part of the hypothesis, frequency is a property of the system, determined by material and dimensions. Initial energy affects vibration amplitude, not frequency. The frequency is set by length. Thus, resonant frequency is theoretically independent of initial energy, supporting the hypothesis. $f_{n}\not\sim E_{initial}$
+    \autocite{EngMechanics}.
 
     \subsection{Finite Element Analysis} \label{FEA}%360.
     As explained in Section \ref{FEM}, FEA is a method to compute partial differential equations, and as shown in Section \ref{Theory} the resonant frequencies of the beam can be calculated with an partial differential equation.
@@ -142,11 +146,10 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
     \begin{align}%eqn:constants
     \label{eqn:constants}
     \begin{split}
-    \diameter&=22mm
-    \\
+    \diameter&=22mm\\
     l_{1}&=200mm\\
-    l_{3}&=150mm\\
-    l_{5}&=100mm\\
+    l_{2}&=150mm\\
+    l_{3}&=100mm\\
     E_{1}&=5\text{ J}\\
     E_{2}&=7.5\text{ J}\\
     E_{3}&=10\text{ J}\\
@@ -235,6 +238,7 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
     \end{align}
     According to \eqref{eqn:theory}, $\frac{1}{l^{2}}$ and $f$ should be proportional, in other words, when graphed, the best line of fit should be a straight line crossing the origin, or in mathematical terms, $f \approx k \frac{1}{l^{2}}$ where $k$ is arbitrary.
     Doing the regression analysis, using ``LibreOffice Calc'', we get $f=15226342\frac{1}{l^{2}}+13.9$, or $f\propto\frac{1}{l^{2}}+9.1\times10^{-7}$ and the coefficient of determination is $R^{2}=0.99998$, showing strong correlation as seen in Figure \ref{fig:regression}\\
+    Where $l$ is the length of the beam.\\
     While the result is off by $9.1\times10^{-7}$, this error is small enough in magnitude to be negligible.
     \begin{figure}[H]%fig:regression
     \begin{center}
@@ -298,6 +302,7 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
      h_3&=509,6\text{ mm}\\
     \end{split}
     \end{align}
+    Where $h$ is the height of the hammer.
 
 
     \begin{table}[H]%Tab:VarTable
@@ -418,7 +423,7 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
 
 \section{Discussion}% need 200
 
-The findings from both the simulation and experimental methods generally support the hypothesis, that the resonant frequency of a the beam is inversely proportional to the square of its length and is independent of the initial energy.  Regression analysis of both the simulation and experimental data gave high $R^2$ values, 0.99998 and 0.97809 respectively, for the linear relationship between frequency and $1/l^2$, indicating a strong correlation. However, the experimental frequencies are consistently lower than those predicted by the simulation for each set of beams. This discrepancy could be attributed to systematic error, coming from factors including material property variations, the imperfect vise fixture in the experiment, and also the imperfect Fourier Transform.
+The findings from both the simulation and experimental methods generally support the hypothesis, that the resonant frequency of a the beam is inversely proportional to the square of its length and is independent of the initial energy.  Regression analysis of both the simulation and experimental data gave high $R^2$ values, 0.99998 and 0.97809 respectively, for the linear relationship between frequency and $\frac{1}{l^2}$, indicating a strong correlation. However, the experimental frequencies are consistently lower than those predicted by the simulation for each set of beams. This discrepancy could be attributed to systematic error, coming from factors including material property variations, the imperfect vise fixture in the experiment, and also the imperfect Fourier Transform.
 
 The nonzero Y axis intercept in both the simulation and experiment (13.9 and 170 respectively), an order of magnitude larger on the experiment compared to the simulation, this suggests a systematic error on both. This indicates an underestimation of frequency at longer lengths, or might reflect limitations of the simple linear model at lower frequencies.
 The near-negligible effect of initial energy on resonant frequency was confirmed by both the Finite Element Analysis and experiment, matching the theory. The systematic error could also be caused by the width of the beam being non-negligible width.
