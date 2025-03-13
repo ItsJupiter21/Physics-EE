@@ -189,14 +189,7 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
     \centering
     \end{figure}
     To start, a model was created for each length $l$, and was attached to a solid block as a reference frame. The 200mm long beam can be seen in Figure \ref{fig:CADPic}
-    And for each block, the Finite Element simulation was run 3 times, once per $E$ value.
-    The deformation model for each model can be seen in Figure \ref{fig:FEAPic}, and the readings from the simulation was put into Table \ref{Tab:VarTable} and as expected, initial energy $E$ shows no correlation with the frequency $f$, and the second part of \eqref{eqn:theory} has been shown true.
-    \begin{figure}[H]%fig:FEAPic
-    \includegraphics[width=0.7\textwidth]{FEA3}
-    \centering
-    \caption{the Result of the FEA Analysis, With the Colors Representing Deformation $\epsilon$.}\label{fig:FEAPic}
-    \centering
-    \end{figure}
+    And for each block, the Finite Element simulation was run 9 times, once per energy $E$ and length $l$ value.
     \begin{table}[H]%Tab:VarTable
     \begin{center}
     \begin{tabular}[H]{|c|c||c|c||c|}
@@ -225,6 +218,8 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
     \end{center}
     \caption{the FEA Results}\label{Tab:FEAtable}
     \end{table}
+    The readings from the simulation was put into Table \ref{Tab:VarTable} and as expected, initial energy $E$ shows no correlation with the frequency $f$, and the second part of \eqref{eqn:theory} has been shown true.
+
     For the first part of \eqref{eqn:theory}, the modeling of $\frac{1}{l^{2}}$ in relation to $f$ is required, so for each value of $l$, and calculating it for each of gives the $\frac{1}{l^{2}}$ column of Table \ref{Tab:VarTable} and the unit analysis regarding the unit of $\frac{1}{l^{2}}$ is given in \eqref{eqn:unitconv}.
     \begin{align}%eqn:unitconv
     \label{eqn:unitconv}
@@ -309,14 +304,14 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
     \begin{center}
     \begin{tabular}[H]{|c|c|c|c||c|}
     \hline
-    Variable & Length $l$  & Energy $E$  & Hammer Height $h$ & Frequency $f$ \\
+    \textbf{Variable} & Length $l$  & Energy $E$  & Hammer Height $h$ & Frequency $f$ \\
     \hline\hline
-    Type     & Independent & Independent & Independent     & Dependent  \\
+    \textbf{Type}     & Independent & Independent & Independent     & Dependent  \\
              & Discrete    & Discrete    & Discrete        & Continuous  \\
     \hline
-    Unit     & mm          & J           & mm              & Hz, s$^{-1}$ \\
+    \textbf{Unit}     & mm          & J           & mm              & Hz, s$^{-1}$ \\
     \hline
-    Control  & Calipers    & Calculated from $h$ & Calipers&  Fourier Transform\\
+    \textbf{Control} & Calipers    & Calculated from $h$ & Calipers&  Fourier Transform\\
     \hline
     \end{tabular}
     \end{center}
@@ -370,7 +365,7 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
     \hline
     \end{tabular}
     \end{center}
-    \caption{The Results Of the Experiment}\label{Tab:TableResults}
+    \caption{the Values from the Finite Element Analysis.}\label{Tab:TableResults}
     \end{table}
     Looking at Table \ref{Tab:TableResults}, It is clear that $E$ and $f$ have no relation, as suggested in \eqref{eqn:theory} and simulated in Section \ref{FEA}, with this, every subsequent section will only take recordings where $E=10$ J into account.
 
