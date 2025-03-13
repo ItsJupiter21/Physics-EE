@@ -1,6 +1,6 @@
 
 # Get the word count number
-number=$(pdftotext EE.pdf - | egrep -e '\w\w\w+' | iconv -f ISO-8859-15 -t UTF-8 | wc -w)
+number=$(pdftotext EE.pdf - | grep -Ee '\w\w\w+' | iconv -f ISO-8859-15 -t UTF-8 | wc -w)
 
 
 # Use sed to replace the line in EE.tex

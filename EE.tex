@@ -45,7 +45,7 @@
 
         \vspace{0.8cm}
 
-        Word Count:3870
+        Word Count:3867
 
 
     \end{center}
@@ -66,7 +66,7 @@ While the use of such simple elements is still common in traditional constructio
 
 I was fascinated to learn that such simple structures lie at the core of technologies we take for granted today. This pushed me to further investigate their functionality and their dynamic properties. My research question is ``\ResearchQ'' and
 I aim to determine how the length of the beam and the initial energy loaded into the beam will affect the frequency that the beam naturally vibrates at when excited using pure mathematics and experimentally.
-In addition to proving it mathematically and experimentally, I also intend to conduct a virtual experiment, using finite element analysis.
+In addition to proving it mathematically and experimentally, I also intend to conduct a virtual experiment, using Finite Element Analysis.
 As shown in \eqref{eqn:theory}, I am expecting to see the frequency is inversely proportional to the square of its length, and to see no meaningful relationship between the frequency and the initial energy load.
 \begin{align}%eqn:theory
 \label{eqn:theory}
@@ -76,6 +76,7 @@ f_{n}&\propto \frac{1}{l^{2}}
 f_{n}&\not\sim E_{initial}
 \end{split}
 \end{align}
+Where $f_n$ is the natural frequency, $l$ is the length of the beam and $E_{initial}$ is the amount of energy used to excite the beam.\\
 I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and show it to be true in Section \ref{FEA} and Section \ref{Experiment} Using computational dynamics and an experiment respectively, and discuss the results, potential errors in methodology and what could be improved in Section \ref{ResultsAnalysis}.
 
 \section{Background Information}%745.
@@ -151,7 +152,7 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
     E_{3}&=10\text{ J}\\
     \end{split}
     \end{align}
-    As shown in \eqref{eqn:constants}, The diameter $\diameter$ and length $l$ have been picked according to commonly available materials and for ease of assess, the lengths picked should also be able to give a wide variety of frequencies.
+    As shown in \eqref{eqn:constants}, The diameter $\diameter$, length $l$ and inital energy $E$ have been picked according to commonly available materials and for ease of assess, the lengths picked should also be able to give a wide variety of frequencies.
     Additionally, the material properties of hardened carbon steel are required to run the simulation, shown in \eqref{eqn:steel}, these values were taken from Onshape.
     \begin{align}%eqn:steel
     \label{eqn:steel}
@@ -162,7 +163,7 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
     \end{split}
     \end{align}
     Where $\rho$ is the Density, $\nu$ is Poisson's ratio and $E$ is Young's Modulus
-    \begin{figure}[H]%fig:VarTable
+    \begin{table}[H]%Tab:VarTable
     \begin{center}
     \begin{tabular}[H]{|c||c|c|c|c|}
     \hline
@@ -171,13 +172,13 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
     \textbf{Type} & Independent & Independent & Dependent & Dependent \\
     & Discrete & Discrete & Continuous & Continuous \\
     \hline
-    \textbf{Unit} & mm & J & mm & hz, s$^{-1}$ \\
+    \textbf{Unit} & mm & J & mm & Hz, s$^{-1}$ \\
     \hline
     \end{tabular}
     \end{center}
-    \caption{Table of Variables for the Simulation}\label{fig:VarTable}
-    \end{figure}
-    The table of variables, is shown in Figure \ref{fig:VarTable}. The length $l$ and energy $E$ will be changed according to \eqref{eqn:constants} and a separate simulation will be ran for each.
+    \caption{Table of Variables for the Simulation}\label{Tab:VarTable}
+    \end{table}
+    The table of variables, is shown in Table \ref{Tab:VarTable}. The length $l$ and energy $E$ will be changed according to \eqref{eqn:constants} and a separate simulation will be ran for each.
     \begin{figure}[H]%fig:CADPic
     \includegraphics[width=0.5\textwidth]{CADPic}
     \centering
@@ -186,50 +187,50 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
     \end{figure}
     To start, a model was created for each length $l$, and was attached to a solid block as a reference frame. The 200mm long beam can be seen in Figure \ref{fig:CADPic}
     And for each block, the Finite Element simulation was run 3 times, once per $E$ value.
-    The deformation model for each model can be seen in Figure \ref{fig:FEAPic}, and the readings from the simulation was put into Figure \ref{fig:FEAtable} and as expected, initial energy $E$ shows no correlation with the frequency $f$, and the second part of \eqref{eqn:theory} has been shown true.
+    The deformation model for each model can be seen in Figure \ref{fig:FEAPic}, and the readings from the simulation was put into Table \ref{Tab:VarTable} and as expected, initial energy $E$ shows no correlation with the frequency $f$, and the second part of \eqref{eqn:theory} has been shown true.
     \begin{figure}[H]%fig:FEAPic
     \includegraphics[width=0.7\textwidth]{FEA3}
     \centering
     \caption{the Result of the FEA Analysis, With the Colors Representing Deformation $\epsilon$.}\label{fig:FEAPic}
     \centering
     \end{figure}
-    \begin{figure}[H]%fig:FEAtable
+    \begin{table}[H]%Tab:VarTable
     \begin{center}
     \begin{tabular}[H]{|c|c||c|c||c|}
     \hline
     $l$ & $E$ & $f$ & $\epsilon$ & $\frac{1}{l^{2}}$\\
     \hline\hline
-    100mm & 5 J & 1536 hz & 1.434 mm & $10^{-4}~mm^{-2}$\\
+    100mm & 5 J & 1536 Hz & 1.434 mm & $10^{-4}~mm^{-2}$\\
     \hline
-    100mm & 7.5 J & 1536 hz & 1.756mm & $10^{-4}~mm^{-2}$ \\
+    100mm & 7.5 J & 1536 Hz & 1.756mm & $10^{-4}~mm^{-2}$ \\
     \hline
-    100mm & 10 J & 1536 hz & 2.028mm & $10^{-4}~mm^{-2}$\\
+    100mm & 10 J & 1536 Hz & 2.028mm & $10^{-4}~mm^{-2}$\\
     \hline
-    150mm & 5 J & 694.2 hz & 2.601mm & $4.44\times10^{-5}mm^{-2}$\\
+    150mm & 5 J & 694.2 Hz & 2.601mm & $4.44\times10^{-5}mm^{-2}$\\
     \hline
-    150mm & 7.5 J & 694.2 hz & 3.185mm & $4.44\times10^{-5}mm^{-2}$\\
+    150mm & 7.5 J & 694.2 Hz & 3.185mm & $4.44\times10^{-5}mm^{-2}$\\
     \hline
-    150mm & 10 J & 694.2 hz & 3.678mm & $4.44\times10^{-5}mm^{-2}$\\
+    150mm & 10 J & 694.2 Hz & 3.678mm & $4.44\times10^{-5}mm^{-2}$\\
     \hline
-    200mm & 5 J & 392.9 hz & 3.981mm & $2.5\times10^{-5}mm^{-2}$\\
+    200mm & 5 J & 392.9 Hz & 3.981mm & $2.5\times10^{-5}mm^{-2}$\\
     \hline
-    200mm & 7.5 J & 392.9 hz & 4.876mm & $2.5\times10^{-5}mm^{-2}$\\
+    200mm & 7.5 J & 392.9 Hz & 4.876mm & $2.5\times10^{-5}mm^{-2}$\\
     \hline
-    200mm & 10 J & 392.9 hz & 5.630mm & $2.5\times10^{-5}mm^{-2}$\\
+    200mm & 10 J & 392.9 Hz & 5.630mm & $2.5\times10^{-5}mm^{-2}$\\
     \hline
     \end{tabular}
     \end{center}
-    \caption{the FEA Results}\label{fig:FEAtable}
-    \end{figure}
-    For the first part of \eqref{eqn:theory}, the modeling of $\frac{1}{l^{2}}$ in relation to $f$ is required, so for each value of $l$, and calculating it for each of gives the $\frac{1}{l^{2}}$ column of Figure \ref{fig:FEAtable} and the unit analysis regarding the unit of $\frac{1}{l^{2}}$ is given in \eqref{eqn:unitconv}.
+    \caption{the FEA Results}\label{Tab:FEAtable}
+    \end{table}
+    For the first part of \eqref{eqn:theory}, the modeling of $\frac{1}{l^{2}}$ in relation to $f$ is required, so for each value of $l$, and calculating it for each of gives the $\frac{1}{l^{2}}$ column of Table \ref{Tab:VarTable} and the unit analysis regarding the unit of $\frac{1}{l^{2}}$ is given in \eqref{eqn:unitconv}.
     \begin{align}%eqn:unitconv
     \label{eqn:unitconv}
     \begin{split}
     \text{Given:}\\
-    l&=\text{mm}\\
-    f^{2}&=\text{mm}^{2}\\
+    l&=\text{[mm]}\\
+    l^{2}&=[\text{mm}^{2}]\\
     \text{Thus:}\\
-    \frac{1}{f^{2}}&=\text{mm}^{-2}\\
+    \frac{1}{l^{2}}&=[\text{mm}^{-2}]\\
     \end{split}
     \end{align}
     According to \eqref{eqn:theory}, $\frac{1}{l^{2}}$ and $f$ should be proportional, in other words, when graphed, the best line of fit should be a straight line crossing the origin, or in mathematical terms, $f \approx k \frac{1}{l^{2}}$ where $k$ is arbitrary.
@@ -240,7 +241,7 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
     \begin{tikzpicture}
     \begin{axis}[
         xlabel={$\frac{1}{l^{2}}$ [mm$^-2$]},
-        ylabel={Frequency $f$ [hz]},
+        ylabel={Frequency $f$ [Hz]},
         legend pos=north west,
         ymajorgrids=true,
         grid style=dashed,
@@ -269,13 +270,14 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
 
 
     \subsection{Experiment}\label{Experiment}%429.
-    As shown in Section \ref{FEA}, the results of the Finite Element Analysis follow the expected relation in Section \ref{Theory}. And thus, this experiment aims to replicate the simulation setup used previously, and show that (a) The natural frequency values match those from Figure \ref{fig:FEAtable} and (b) the natural frequency follows the model as shown in equation \eqref{eqn:theory}.\\
-    The material of the experiment is shown in Figure \ref{fig:materials}. And the initial energy loaded into the material will be controlled by the height of the hammer $h$ as given by the gravitational potential energy, as shown in \eqref{eqn:mgh}.
-    \begin{figure}[H]%fig:materials
+    As shown in Section \ref{FEA}, the results of the Finite Element Analysis follow the expected relation in Section \ref{Theory}. And thus, this experiment aims to replicate the simulation setup used previously, and show that (a) The natural frequency values match those from Table \ref{Tab:VarTable} and (b) the natural frequency follows the model as shown in equation \eqref{eqn:theory}.\\
+    The the initial energy loaded into the material will be controlled by the height of the hammer $h$ as given by the gravitational potential energy, as shown in \eqref{eqn:mgh}.
+
     \begin{equation}\label{eqn:mgh}
      E=mgh
     \end{equation}
-    To calculate the energy of the hammer, $m=2\text{ kg}$ and $g=9.81\text{ms}^{-1}$ is substituted in \eqref{eqn:mgh} to get \eqref{eqn:hammerE}, additionally, the units of $h$ has been converted to meters.
+    Where $E$ is the energy of the hammer, $m$ is the mass of the hammer and $h$ is the height.\\
+    To calculate the energy of the hammer, $m=2\text{ kg}$ and $g=9.81\text{ms}^{-2}$ is substituted in \eqref{eqn:mgh} to get \eqref{eqn:hammerE}, additionally, the units of $h$ has been converted to meters.
     \begin{align}%eqn:hammerE
     \label{eqn:hammerE}
     \begin{split}
@@ -284,18 +286,7 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
     \end{split}
     \end{align}
 
-    \begin{center}
-    \begin{tabular}[H]{|c|c|c|c|}
-    \hline
-    1 & 2 & 3 & 4\\
-    \hline
-    Metal Bar & Hammer & Vise & Sound Recorder\\
-    \hline
-    \end{tabular}
-    \end{center}
-    \caption{the Materials Used in The Experiment}\label{fig:materials}
-    \end{figure}
-    The table Of variables as seen in  Figure \ref{fig:ExpVarTable} is similar to Figure \ref{fig:VarTable}, found in Section \ref{FEA} but a few changes were made to facilitate the experiment, notably, the deformation of the material $\epsilon$ is no longer measured, because of the difficulty that arises from trying to measure it while leaving frequency $f$ unaffected. And finally, hammer height has been added as a variable, this is the method for controlling the initial energy load $E$ for the analysis.\\
+    The table Of variables as seen in  Table \ref{Tab:VarTable} is similar to Table \ref{Tab:VarTable}, found in Section \ref{FEA} but a few changes were made to facilitate the experiment, notably, the deformation of the material $\epsilon$ is no longer measured, because of the difficulty that arises from trying to measure it while leaving frequency $f$ unaffected. And finally, hammer height has been added as a variable, this is the method for controlling the initial energy load $E$ for the analysis.\\
     The same values for $\diameter$, $l$ and $E$ will be used as \eqref{eqn:constants} in Section \ref{FEA}, the values for $h$ will be calculated according to \eqref{eqn:hammerE}, shown in \eqref{eqn:hvals}.
 
     \begin{align}%eqn:hvals
@@ -309,7 +300,7 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
     \end{align}
 
 
-    \begin{figure}[H]%fig:ExpVarTable
+    \begin{table}[H]%Tab:VarTable
     \begin{center}
     \begin{tabular}[H]{|c|c|c|c||c|}
     \hline
@@ -318,14 +309,14 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
     Type     & Independent & Independent & Independent     & Dependent  \\
              & Discrete    & Discrete    & Discrete        & Continuous  \\
     \hline
-    Unit     & mm          & J           & mm              & hz, s$^{-1}$ \\
+    Unit     & mm          & J           & mm              & Hz, s$^{-1}$ \\
     \hline
     Control  & Calipers    & Calculated from $h$ & Calipers&  Fourier Transform\\
     \hline
     \end{tabular}
     \end{center}
-    \caption{Table Of Variables for the Experiment}\label{fig:ExpVarTable}
-    \end{figure}
+    \caption{Table Of Variables for the Experiment}\label{Tab:ExpVarTable}
+    \end{table}
     The setup of the experiment is shown in Figure \ref{fig:EXPPic}, the height of the hammer is specifically chosen so the corner of the hammer hits the corner of the metal bar, to ensure the bar is excited the same way every time.
 
     \begin{figure}[H]%fig:EXPPic
@@ -338,47 +329,47 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
     \begin{figure}[H]%fig:recPic
     \includegraphics[width=0.9\textwidth]{Recording}
     \centering
-    \caption{the Waveform From $E=10$ J and $l=200$ mm}\label{fig:recPic}
+    \caption{the Recording From $E=10$ J and $l=200$ mm}\label{fig:recPic}
     \end{figure}
-    For consistency, a 1 second section following the immediate peak(caused by the initial collision with the hammer) was taken from each recording, and that specific section was put through the FFT algorithm.\\
+    For consistency, a 1 second section following the immediate peak(caused by the initial collision with the hammer) was taken from each recording, divided into 32768 time-pressure samples and the data was put through the Fast Fourier Transform algorithm, more specifically, the ``Spectrum'' algorthim in the Frequency Analysis tool in the open source audio procsessing program ``Audacity''.
     \begin{figure}[H]%fig:FFPTPic
     \includegraphics[width=0.8\textwidth]{FFTImage}
     \centering
-    \caption{Recording Converted to Frequency Domain Using The FFT, There is a peak at 334 hz.}\label{fig:FFTPic}
+    \caption{Frequency-Amplitude Graph Attained From the Analysis(Log Scale) There is a clear peak at 334 Hz.}\label{fig:FFTPic}
     \end{figure}
-    Each set of length and energy was ran 3 times to determine the magnitude of random error in the experiment. After putting every single recording through the Fast Fourier Transform algorithm and picking the peak frequency for each one, the results are seen in Figure \ref{fig:TableResults}.
+    Each set of length and energy was ran 3 times to determine the magnitude of random error in the experiment. After putting every single recording through the Fast Fourier Transform algorithm and picking the peak frequency for each one, the results are seen in Table \ref{Tab:TableResults}.
 
-    \begin{figure}[H]%fig:TableResults
+    \begin{table}[H]%Tab:TableResults
     \begin{center}
     \begin{tabular}[H]{|c|c|c||c|c|c|c|}
     \hline
     $l$ & $\frac{1}{l^2}$ & $E$ & $f_1$ & $f_2$ & $f_3$ & $f_{mean}$  \\
     \hline\hline
-    100mm & $10^{-4}~mm^{-2}$ & 5 J & 956 hz & 913 hz & 907 hz & $925\pm2.98$ hz \\
+    100mm & $10^{-4}~mm^{-2}$ & 5 J & 956 Hz & 913 Hz & 907 Hz & $925\pm2.98$ Hz \\
     \hline
-    100mm & $10^{-4}~mm^{-2}$ & 7.5 J & 913 hz & 933 hz & 936 hz & $927\pm2.04$ hz \\
+    100mm & $10^{-4}~mm^{-2}$ & 7.5 J & 913 Hz & 933 Hz & 936 Hz & $927\pm2.04$ Hz \\
     \hline
-    100mm & $10^{-4}~mm^{-2}$ & 10 J & 914 hz & 927 hz & 895 hz &$912\pm2.32$ hz \\
+    100mm & $10^{-4}~mm^{-2}$ & 10 J & 914 Hz & 927 Hz & 895 Hz &$912\pm2.32$ Hz \\
     \hline
-    150mm & $10^{-4}~mm^{-2}$ & 5 J & 563 hz & 539 hz & 563 hz &$555\pm2.15$ hz \\
+    150mm & $10^{-4}~mm^{-2}$ & 5 J & 563 Hz & 539 Hz & 563 Hz &$555\pm2.15$ Hz \\
     \hline
-    150mm & $10^{-4}~mm^{-2}$ & 7.5 J & 536 hz & 539 hz & 564 hz &$546\pm2.26$ hz \\
+    150mm & $10^{-4}~mm^{-2}$ & 7.5 J & 536 Hz & 539 Hz & 564 Hz &$546\pm2.26$ Hz \\
     \hline
-    150mm & $10^{-4}~mm^{-2}$ & 10 J & 540 hz & 534 hz & 540 hz &$538\pm1.07$ hz \\
+    150mm & $10^{-4}~mm^{-2}$ & 10 J & 540 Hz & 534 Hz & 540 Hz &$538\pm1.07$ Hz \\
     \hline
-    200mm & $10^{-4}~mm^{-2}$ & 5 J & 335 hz & 335 hz & 324 hz &$331\pm1.45$ hz \\
+    200mm & $10^{-4}~mm^{-2}$ & 5 J & 335 Hz & 335 Hz & 324 Hz &$331\pm1.45$ Hz \\
     \hline
-    200mm & $10^{-4}~mm^{-2}$ & 7.5 J & 335 hz & 334 hz & 334 hz &$334\pm0.44$ hz \\
+    200mm & $10^{-4}~mm^{-2}$ & 7.5 J & 335 Hz & 334 Hz & 334 Hz &$334\pm0.44$ Hz \\
     \hline
-    200mm & $10^{-4}~mm^{-2}$ & 10 J & 334 hz & 334 hz & 332 hz &$333\pm0.62$ hz \\
+    200mm & $10^{-4}~mm^{-2}$ & 10 J & 334 Hz & 334 Hz & 332 Hz &$333\pm0.62$ Hz \\
     \hline
     \end{tabular}
     \end{center}
-    \caption{The Results Of the Experiment}\label{fig:TableResults}
-    \end{figure}
-    Looking at Figure \ref{fig:TableResults}, It is clear that $E$ and $f$ have no relation, as suggested in \eqref{eqn:theory} and simulated in Section \ref{FEA}, with this, every subsequent section will only take recordings where $E=10$ J into account.
+    \caption{The Results Of the Experiment}\label{Tab:TableResults}
+    \end{table}
+    Looking at Table \ref{Tab:TableResults}, It is clear that $E$ and $f$ have no relation, as suggested in \eqref{eqn:theory} and simulated in Section \ref{FEA}, with this, every subsequent section will only take recordings where $E=10$ J into account.
 
-    In a similar manner to Figure \ref{fig:regression}, the data in Figure \ref{fig:TableResults} has been graphed and a linear fit line has been calculated, and shown in Figure \ref{fig:EXPregression}.
+    In a similar manner to Figure \ref{fig:regression}, the data in Figure \ref{Tab:TableResults} has been graphed and a linear fit line has been calculated, and shown in Figure \ref{fig:EXPregression}.
     From the analysis, the values $R^2=0.97809$ showing strong correlation and $f=7605636\frac{1}{l^{2}}+170$ were acquired, or transformed to $f\propto\frac{1}{l^{2}}+2.2\times10^{-5}$\\
     While the result is once again, off by $2.2\times10^{-5}$, it is small enough to be negligible.
 
@@ -387,7 +378,7 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
     \begin{tikzpicture}
     \begin{axis}[
         xlabel={$\frac{1}{l^{2}}$ [mm$^-2$]},
-        ylabel={Frequency $f$ [hz]},
+        ylabel={Frequency $f$ [Hz]},
         legend pos=north west,
         ymajorgrids=true,
         grid style=dashed,
@@ -416,21 +407,21 @@ I intend to derive the hypothesis \eqref{eqn:theory} in Section \ref{Theory} and
 
 \section{Results And Analysis}\label{ResultsAnalysis}%need 200
     \subsection{Uncertainty Analysis}%need 200
-    In both Section \ref{FEA} and Section \ref{Experiment}, where the same experiment was conducted on a simulation and a physical experiment, there exists several sources of uncertainty that can influence the results.  For the Finite Element Analysis, the primary source is the mesh resolution. Since Onshape automatically generates the mesh, the level of refinement and its impact on frequency values was not systematically investigated. According to Onshape, the ``Variance of frequency analysis is within 0.1 hz for simple structures.''\autocite{Onshape}.\\
+    In both Section \ref{FEA} and Section \ref{Experiment}, where the same experiment was conducted on a simulation and a physical experiment, there exists several sources of uncertainty that can influence the results.  For the Finite Element Analysis, the primary source is the mesh resolution. Since Onshape automatically generates the mesh, the level of refinement and its impact on frequency values was not systematically investigated. According to Onshape, the ``Variance of frequency analysis is within 0.1 Hz for simple structures.''\autocite{Onshape}.\\
     The  material properties used in the analysis are nominal values for the hardened carbon steel material and the actual material properties of the physical beams used might have some small differences, contributing to systematic error. The boundary conditions in simulation are idealized as perfectly fixed, while in reality, the vise has introduced some compliance and damping, as it can be seen from Figure \ref{fig:recPic}, the magnitude of the noise quickly decreases, also contributing to the systematic error not found in the idealized simulation.
 
     In the experiment, length measurements using calipers have a precision limit, while relatively tiny, it introduces a small uncertainty in $\frac{1}{l^2}$ values.
     Controlling the initial energy was also dependent on the mass and the height measurements of the hammer, but consistency in hammer drop and energy transfer is imperfect and it also introduced some random error.
     The rigidity of the vise and the damping at the fixture point also has also introduce additional random uncertainties.
     Finally, identifying the resonant frequency from the Fourier Transform plots involves a degree of subjectivity and precision limitations in peak frequency determination.
-    These uncertainties, from both FEA and experiment, should be considered when interpreting and comparing the results, and were included in the Tables and values where possible.
+    These uncertainties, from both the Finite Element Analysis and experiment, should be considered when interpreting and comparing the results, and were included in the Tables and values where possible.
 
 \section{Discussion}% need 200
 
 The findings from both the simulation and experimental methods generally support the hypothesis, that the resonant frequency of a the beam is inversely proportional to the square of its length and is independent of the initial energy.  Regression analysis of both the simulation and experimental data gave high $R^2$ values, 0.99998 and 0.97809 respectively, for the linear relationship between frequency and $1/l^2$, indicating a strong correlation. However, the experimental frequencies are consistently lower than those predicted by the simulation for each set of beams. This discrepancy could be attributed to systematic error, coming from factors including material property variations, the imperfect vise fixture in the experiment, and also the imperfect Fourier Transform.
 
 The nonzero Y axis intercept in both the simulation and experiment (13.9 and 170 respectively), an order of magnitude larger on the experiment compared to the simulation, this suggests a systematic error on both. This indicates an underestimation of frequency at longer lengths, or might reflect limitations of the simple linear model at lower frequencies.
-The near-negligible effect of initial energy on resonant frequency was confirmed by both FEA and experiment, matching the theory. The systematic error could also be caused by the width of the beam being non-negligible width.
+The near-negligible effect of initial energy on resonant frequency was confirmed by both the Finite Element Analysis and experiment, matching the theory. The systematic error could also be caused by the width of the beam being non-negligible width.
 
 To improve this investigation, the experimental setup could be improved for more consistent energy input and fixture rigidity. other studies could explore beams of different materials or cross-sections to test the broader applicability of the observed relationships, and additionally could individually test material properties for it to match the simulation more closely.
 
