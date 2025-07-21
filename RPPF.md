@@ -1,4 +1,4 @@
-- Candidate Personal code: lqj566
+- Candidate Personal code: 
 - Supervisor Initials: GT
 
 - **First Meeting** 136 words
